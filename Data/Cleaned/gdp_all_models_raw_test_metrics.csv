@@ -1,0 +1,16 @@
+spec,algorithm,model,n_obs,MAE,RMSE,MAPE_pct,R_squared
+Model 1,OLS,Model 1 - Baseline Dynamic,813,1498.1181,3477.1503,9.1617,0.9766
+Model 1,Ridge,Ridge Model 1 - Baseline Dynamic,1042,1703.8717,3976.4164,9.3056,0.9821
+Model 1,Elastic Net,Elastic Net Model 1 - Baseline Dynamic,1042,1702.1639,3977.374,9.3014,0.9821
+Model 1,Random Forest,Random Forest Model 1 - Baseline Dynamic,1042,1942.1704,5420.2788,10.0114,0.9668
+Model 1,XGBoost,XGBoost Model 1 - Baseline Dynamic,1042,2088.0187,5968.9899,10.2253,0.9598
+Model 2,OLS,Model 2 - Extended Dynamic,813,1485.094,3482.8558,9.0518,0.9765
+Model 2,Ridge,Ridge Model 2 - Extended Dynamic,813,1490.5958,3483.98,9.148,0.9765
+Model 2,Elastic Net,Elastic Net Model 2 - Extended Dynamic,813,1486.9078,3468.6213,9.1557,0.9767
+Model 2,Random Forest,Random Forest Model 2 - Extended Dynamic,813,1687.3212,4027.8137,9.8958,0.9685
+Model 2,XGBoost,XGBoost Model 2 - Extended Dynamic,813,1858.3526,4168.2013,12.3253,0.9663
+Model 3,OLS,Model 3 - Full Dynamic,813,1468.1942,3472.995,8.8964,0.9766
+Model 3,Ridge,Ridge Model 3 - Full Dynamic,813,1468.1942,3472.9951,8.8964,0.9766
+Model 3,Elastic Net,Elastic Net Model 3 - Full Dynamic,813,1487.8599,3476.2812,9.1411,0.9766
+Model 3,Random Forest,Random Forest Model 3 - Full Dynamic,813,1653.6599,3966.4374,9.4865,0.9695
+Model 3,XGBoost,XGBoost Model 3 - Full Dynamic,813,1786.7812,4331.0483,10.5643,0.9636

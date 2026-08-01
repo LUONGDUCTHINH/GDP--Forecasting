@@ -1,0 +1,5 @@
+model,model_family,split,scale,n_obs,alpha,MAE,RMSE,MAPE_pct,R_squared
+Ridge Model 2 - Extended Dynamic,Regularized Linear ML,train,level_gdp_usd,3909,10.0,941.9662,2176.0164,9.028,0.9841
+Ridge Model 2 - Extended Dynamic,Regularized Linear ML,train,log_gdp,3909,10.0,0.0887,0.1305,1.1243,0.993
+Ridge Model 2 - Extended Dynamic,Regularized Linear ML,test,level_gdp_usd,813,10.0,1490.5958,3483.98,9.148,0.9765
+Ridge Model 2 - Extended Dynamic,Regularized Linear ML,test,log_gdp,813,10.0,0.0894,0.1238,1.0292,0.9923

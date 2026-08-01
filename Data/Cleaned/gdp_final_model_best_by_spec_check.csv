@@ -1,0 +1,4 @@
+spec,algorithm,existing_best_algorithm,matches_existing_file
+Model 1,OLS,OLS,True
+Model 2,Elastic Net,Elastic Net,True
+Model 3,OLS,OLS,True

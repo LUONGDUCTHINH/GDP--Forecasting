@@ -1,0 +1,5 @@
+model,model_family,split,scale,n_obs,alpha,MAE,RMSE,MAPE_pct,R_squared
+Ridge Model 3 - Full Dynamic,Regularized Linear ML,train,level_gdp_usd,3909,0.0001,913.8368,2110.8172,8.7943,0.985
+Ridge Model 3 - Full Dynamic,Regularized Linear ML,train,log_gdp,3909,0.0001,0.0864,0.1273,1.0952,0.9933
+Ridge Model 3 - Full Dynamic,Regularized Linear ML,test,level_gdp_usd,813,0.0001,1468.1942,3472.9951,8.8964,0.9766
+Ridge Model 3 - Full Dynamic,Regularized Linear ML,test,log_gdp,813,0.0001,0.0878,0.122,1.0074,0.9926

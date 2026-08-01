@@ -1,0 +1,2 @@
+Dataset,Model,MAE,RMSE,MAPE_pct,R_squared,n_predictions,n_countries_modeled
+Life Expectancy,Naive,0.5428421794240196,1.4983706580114573,0.9950072085904257,0.9797307506496135,11684,217

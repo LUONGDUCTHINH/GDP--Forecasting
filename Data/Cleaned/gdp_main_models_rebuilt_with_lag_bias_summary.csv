@@ -1,0 +1,4 @@
+model,n_obs,actual_mean_gdp,predicted_mean_gdp,actual_median_gdp,predicted_median_gdp,mean_absolute_percentage_error_pct,mean_signed_percentage_error_pct,median_signed_percentage_error_pct,pred_to_actual_mean_ratio
+Model 1 - Baseline Dynamic,813,16845.5917,16877.5909,6542.8558,6683.0819,9.1617,2.3684,2.1025,1.0019
+Model 2 - Extended Dynamic,813,16845.5917,16742.7078,6542.8558,6619.5272,9.0518,1.5812,1.2232,0.9939
+Model 3 - Full Dynamic,813,16845.5917,16680.9274,6542.8558,6492.7372,8.8964,1.0965,0.7402,0.9902

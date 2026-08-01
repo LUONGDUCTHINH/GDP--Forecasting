@@ -1,0 +1,1128 @@
+Global GDP per Capita Forecasting and Economic Drivers
+A Data Science Approach Using Demographic and Macroeconomic
+Indicators
+Final Year Project Report
+Student Name: Luong Duc Thinh
+Student ID:
+Programme: Bachelor of Science with Honours in Computing
+Institution: University of Greenwich
+Supervisor:
+Submission Date:
+TABLE OF CONTENTS
+LIST OF FIGURES
+LIST OF TABLES
+Abstract
+Forecasting economic development indicators remains an important problem in data
+science, economics, and public policy. Among macroeconomic indicators, GDP per capita is
+especially important because it reflects average economic output relative to population size
+and therefore provides a more interpretable proxy for living standards than total GDP alone.
+However, GDP per capita is shaped by multiple interacting demographic, social, and
+macroeconomic factors, including population dynamics, life expectancy, inflation,
+unemployment, digital access, and exposure to major global shocks. This project
+investigates whether these indicators can be integrated into an interpretable forecasting
+framework for modelling future GDP per capita at the country level.
+The study uses open country-level datasets derived primarily from World Bank sources,
+including GDP per capita, population, life expectancy, inflation, unemployment, internet
+usage, and country metadata. These datasets were cleaned, standardised, and merged into
+a country-year panel. The final extended panel contains 11,373 observations, 25 variables,
+214 countries, 7 World Bank regions, and the period from 1960 to 2023. In addition to the
+merged panel, separate univariate time-series models were developed for GDP, population,
+and life expectancy in order to support indicator-level forecasting and model comparison.
+Three main GDP models were implemented using an interpretable econometric framework
+in statsmodels. Model 1 uses population and life expectancy as baseline predictors.
+Model 2 extends the baseline by adding inflation, unemployment, and internet usage. Model
+3 further incorporates global event dummies, region effects, and a time trend for
+future-oriented forecasting. For the supporting time-series stage, rolling 10-year backtesting
+was used to compare alternative models. The best-performing models were Naive for GDP,
+Naive for life expectancy, and LogHolt for population. For the main GDP models, in-sample
+fit improved progressively from Model 1 (R² = 0.6950) to Model 2 (R² = 0.7484) and
+Model 3 (R² = 0.7983). A shared train-test comparison also showed that Model 3 was the
+strongest overall specification on the held-out period.
+The analytical outputs were integrated into a Streamlit dashboard for multi-indicator
+exploration, model comparison, rolling backtest inspection, and future forecast visualisation.
+Overall, the project demonstrates how interpretable data science methods can be used to
+combine exploratory analysis, time-series forecasting, panel-style regression, and interactive
+reporting in a coherent GDP-focused decision-support workflow.
+Keywords: GDP per capita, forecasting, time series, panel data, regression, ARIMA, Holt,
+AutoReg, Streamlit, World Bank.
+Chapter 1. Introduction
+1.1 Background
+Economic performance differs widely across countries and regions due to variation in
+demographic structure, labour productivity, health outcomes, macroeconomic stability,
+technological development, and institutional conditions. GDP per capita is one of the most
+widely used indicators in economic analysis because it provides a concise measure of output
+relative to population size. In contrast to total GDP, GDP per capita is more suitable for
+analysing living standards, productivity, and long-term development outcomes because it
+reflects average economic output per person rather than aggregate national scale.
+Nevertheless, GDP per capita does not change independently of other socio-economic
+conditions. Population affects labour supply, market size, and dependency structure. Life
+expectancy reflects broader human capital and health conditions. Inflation and
+unemployment capture macroeconomic instability and labour market weakness. Internet
+usage acts as a proxy for digital access and the broader process of economic
+modernisation. In addition, major global shocks such as financial crises, pandemic
+disruption, and energy shocks can alter national economic trajectories in ways that are not
+captured by smooth trend variables alone.
+From a data science perspective, GDP forecasting is a strong final-year project topic
+because it combines multiple technical stages: data collection, cleaning, feature engineering,
+exploratory analysis, forecasting, statistical modelling, evaluation, and deployment. It also
+enables a useful balance between interpretability and predictive power, which is especially
+important in an academic setting where methods must be both explainable and defensible.
+1.2 Problem Statement
+Although GDP forecasting has been widely studied, many simplified academic
+implementations either focus only on one variable as a univariate time series or apply
+black-box machine learning methods without sufficient interpretability. For a final-year
+project, this creates a methodological challenge. The project must be sufficiently technical to
+demonstrate analytical ability, yet sufficiently transparent to support academic explanation,
+evaluation, and defence.
+More specifically, this study addresses three related problems. First, it seeks to understand
+how GDP per capita evolves across countries and regions over time. Second, it investigates
+whether population, life expectancy, inflation, unemployment, internet usage, and global
+event structure improve the prediction of next-year GDP per capita. Third, it explores how
+analytical outputs can be translated into a dashboard that supports interpretation and
+demonstration.
+A further challenge lies in distinguishing clearly between two modelling tasks. The first is
+indicator-level forecasting, where GDP, population, and life expectancy are each treated as
+separate time series. The second is GDP prediction modelling, where several demographic
+and macroeconomic indicators are used together to estimate future GDP per capita. This
+distinction is essential for methodological clarity.
+1.3 Aim
+The aim of this project is to analyse global GDP per capita trends, investigate the
+relationship between GDP per capita and selected demographic and macroeconomic
+indicators, and develop interpretable forecasting models that predict future GDP per capita
+using open international data.
+1.4 Objectives
+The objectives of the project are as follows:
+1. To collect and prepare open country-level datasets for GDP per capita, population,
+life expectancy, inflation, unemployment, internet usage, and country metadata.
+2. To conduct exploratory data analysis on GDP per capita and related indicators across
+countries, regions, and years.
+3. To engineer a country-year panel dataset with additional global event dummy
+variables.
+4. To build and compare separate time-series models for GDP, population, and life
+expectancy using rolling 10-year backtesting.
+5. To construct three interpretable GDP models of increasing complexity, from a simple
+baseline to a fuller macroeconomic and structural specification.
+6. To evaluate model behaviour using standard metrics such as MAE, RMSE, MAPE,
+and R²
+.
+7. To present the analytical results through an interactive Streamlit dashboard.
+1.5 Research Questions
+This report is organised around the following research questions:
+1. What long-term patterns are visible in GDP per capita, population, and life
+expectancy across countries and regions?
+2. Which time-series models perform best for GDP, population, and life expectancy
+under a rolling 10-year evaluation design?
+3. How much explanatory and predictive improvement is obtained when moving from a
+simple GDP baseline model to a broader macroeconomic and structural
+specification?
+4. How can global event dummies and region effects be incorporated into a practical
+GDP forecasting workflow?
+5. How effectively can the analytical outputs be communicated through an interactive
+data dashboard?
+1.6 Scope of the Study
+This project focuses on annual country-level data derived mainly from World Bank-style
+open datasets. The study is limited to GDP per capita as the primary economic target,
+interpretable modelling techniques implemented in Python, and dashboard deployment
+through Streamlit. The work does not attempt to make strict causal claims. Instead, it
+focuses on association, modelling usefulness, and forecasting-oriented interpretation.
+Although more advanced machine learning techniques such as Random Forest, XGBoost, or
+LSTM could be explored, the current project prioritises transparency and academic
+explainability over black-box predictive complexity.
+1.7 Structure of the Report
+The report is organised as follows. Chapter 2 reviews the relevant literature on economic
+growth, GDP forecasting, macroeconomic drivers, structural shocks, time-series modelling,
+and interpretable prediction. Chapter 3 explains the methodology, including data preparation,
+feature engineering, model construction, and evaluation design. Chapter 4 presents the
+exploratory and descriptive findings. Chapter 5 reports the separate time-series modelling
+results. Chapter 6 presents the three main GDP models and compares their behaviour.
+Chapter 7 describes the dashboard implementation. Chapter 8 provides a critical evaluation,
+including limitations and future work. Chapter 9 concludes the study.
+Chapter 2. Literature Review
+2.1 Introduction to the Literature Review
+Forecasting GDP per capita sits at the intersection of economic growth theory,
+macroeconomic modelling, time-series forecasting, and applied data science. A strong
+literature review for this project must therefore go beyond a narrow discussion of algorithms
+and instead position the study within broader theoretical and empirical debates. In particular,
+the report needs to explain why GDP per capita is an appropriate target, why the selected
+indicators are relevant, why interpretable models are valuable, and why structural shocks
+should be represented explicitly in the modelling design.
+This chapter reviews the literature in five main layers. First, it outlines the economic theory
+behind growth, productivity, and per-capita income. Second, it reviews the literature linking
+demographic and macroeconomic variables to development outcomes. Third, it discusses
+forecasting methods relevant to annual macroeconomic data. Fourth, it evaluates the role of
+structural breaks and global shocks in growth modelling. Finally, it explains the
+methodological gap that the current project addresses.
+2.2 Economic Growth Theory and GDP per Capita
+GDP per capita is widely used in economics because it captures average output per person
+and therefore functions as a practical indicator of productive capacity and living standards. In
+growth theory, long-run income differences are commonly linked to capital accumulation,
+labour force dynamics, productivity, technological change, and human capital formation.
+Solow’s (1956) neoclassical growth model established a foundational framework in which
+output depends on capital, labour, and exogenous technological progress. Although the
+Solow model does not directly use variables such as life expectancy or internet usage, it
+provides the underlying logic for why long-run per-capita output reflects deeper structural
+conditions.
+Later work extended this framework by incorporating human capital more explicitly. Mankiw,
+Romer and Weil (1992) argued that cross-country growth patterns are better explained when
+human capital is added to the traditional Solow framework. This extension is directly relevant
+to the current project because life expectancy can be treated as a broad proxy for human
+development and labour quality, while internet usage can be interpreted as a proxy for
+technological access and modernisation.
+Endogenous growth theory also strengthened the case for including broader socio-economic
+variables in growth models. Romer (1990) emphasised the role of knowledge, innovation,
+and technological change, suggesting that productivity differences across countries cannot
+always be explained by factor accumulation alone. In practical forecasting terms, this
+supports the inclusion of variables that reflect broader development capacity rather than
+relying only on scale variables such as population.
+2.3 Population, Labour, and Per-Capita Output
+Population has a complex relationship with economic performance. On the one hand, a
+larger population can expand labour supply, domestic markets, and aggregate production.
+On the other hand, GDP per capita is not determined by total population alone. A country
+may have a very large population but still have low output per person if productivity,
+infrastructure, institutions, or human capital are weak.
+This distinction is important because it explains why the current project models GDP per
+capita rather than total GDP. In aggregate growth analysis, population is often positively
+linked to total output, but in per-capita modelling the relationship may weaken or even
+change sign after controlling for other factors. This is consistent with the economic logic that
+scale alone does not guarantee high average income. In cross-country work, population is
+therefore better interpreted as a structural context variable than as a simple direct driver of
+per-capita prosperity.
+The decision to use log_population_total in the current project is also supported by
+standard econometric practice. Log transformations reduce extreme scale differences and
+make the relationship more stable across small and large economies.
+2.4 Human Capital, Health, and Life Expectancy
+Human capital has long been recognised as a key determinant of economic development.
+Schultz (1961) and Becker (1964) argued that investments in human capabilities, including
+education and health, improve productivity and long-run economic performance. Although
+these classic studies focused more broadly on human capital, they provide a strong
+conceptual basis for including life expectancy in a GDP model.
+Life expectancy is not a direct measure of skill, but it is a meaningful development indicator
+because it reflects public health, institutional quality, nutrition, healthcare access, and
+long-term welfare conditions. Bloom, Canning and Sevilla (2004) showed that health
+improvements can contribute positively to economic growth by improving labour productivity,
+reducing mortality-related losses, and supporting stronger human capital accumulation. In
+applied country-level modelling, life expectancy therefore serves as a practical proxy for
+broader development capacity.
+For the present study, the inclusion of life expectancy is especially useful because it links
+demographic analysis with economic forecasting. Unlike some purely economic variables
+that are highly volatile, life expectancy tends to evolve gradually, which makes it both
+theoretically meaningful and empirically stable.
+2.5 Inflation, Unemployment, and Macroeconomic
+Stability
+Macroeconomic stability is a central theme in growth and development research. Fischer
+(1993) argued that inflation, budget imbalance, and external instability are associated with
+weaker growth performance. Although inflation is not always uniformly harmful in every
+short-run context, persistent inflation often signals macroeconomic imbalance, reduced
+confidence, and weaker real purchasing power. As a result, inflation is a reasonable
+explanatory variable in a GDP forecasting model.
+Unemployment is also relevant, though its interpretation is more complex. Okun (1962)
+highlighted the relationship between output and unemployment, suggesting that labour
+underutilisation tends to accompany weaker economic performance. However, in
+cross-country pooled models, unemployment can behave differently from a simple short-run
+macroeconomic theory because it is influenced by labour market institutions, income level,
+measurement quality, and structural transformation. This is why unemployment may produce
+counterintuitive coefficients in some multivariate settings. The variable remains important,
+but it must be interpreted cautiously and not causally.
+Taken together, inflation and unemployment provide a macroeconomic stability lens that
+complements demographic and development indicators. Their inclusion in the current project
+helps move the model from a purely demographic baseline toward a more realistic
+macroeconomic specification.
+2.6 Digital Access and Economic Development
+Digital access has become increasingly important in development analysis because
+information and communication technologies affect productivity, connectivity, knowledge
+diffusion, and market participation. The World Bank (2016), in the World Development
+Report: Digital Dividends, argued that digital technologies can enhance economic inclusion
+and efficiency, although their benefits depend on complementary institutions and skills.
+Similarly, research on broadband and digital infrastructure has shown that digital expansion
+may contribute positively to productivity and growth, especially in more connected
+economies.
+In the present project, internet_users_pct_clean is used as a practical proxy for digital
+access and technological diffusion. It is not a complete measure of digital capability, but it
+captures an important dimension of structural modernisation that is often missing from
+traditional GDP models. Its inclusion is especially valuable because it adds a
+development-oriented variable that bridges economics and technology.
+2.7 Time-Series Forecasting for Annual Macro Data
+Time-series modelling remains central to economic forecasting because many
+macroeconomic indicators exhibit persistence, gradual change, and structural shocks over
+time. Hamilton (1994) provided one of the foundational treatments of time-series analysis in
+economics, while Hyndman and Athanasopoulos (2021) offered a modern applied
+framework covering Naive forecasting, autoregressive models, ARIMA, exponential
+smoothing, and evaluation methods.
+In annual cross-country macroeconomic data, simple models often remain surprisingly
+competitive. A Naive model may perform strongly when year-to-year changes are small
+relative to the overall level of the indicator. Autoregressive models are useful when
+short-term memory is informative, while ARIMA can capture differencing and stochastic
+structure in more dynamic series. Exponential smoothing models, such as Holt’s method, are
+particularly effective when the series follows a smooth trend.
+The current project adopts this classical time-series logic for GDP, population, and life
+expectancy separately. This is methodologically appropriate because the three indicators do
+not behave in the same way. The population tends to move smoothly over time and is well
+suited to log-trend smoothing. Life expectancy often follows a gradual development path.
+GDP per capita can be more volatile, but still exhibits persistence strong enough for simple
+baselines to perform well in one-step-ahead forecasting.
+2.8 Panel-Style Regression and Interpretable GDP
+Prediction
+Regression-based models remain widely used in applied econometrics because they
+combine prediction with interpretability. In the context of GDP-related modelling, regression
+enables researchers to explain how multiple indicators are associated with future economic
+outcomes while still producing usable forecasts. Compared with purely black-box methods, a
+regression framework makes it easier to justify variable choice, interpret coefficients, and
+discuss limitations.
+The current project uses next-year log GDP per capita as the target variable. This modelling
+choice is justified for three reasons. First, predicting GDP_(t+1) is more aligned with
+forecasting logic than predicting same-year GDP from same-year inputs. Second, the log
+transformation reduces the influence of extreme values and compresses the distribution
+across rich and poor economies. Third, the transformed target supports more stable
+coefficient estimation across a highly heterogeneous international panel.
+This progression from a simple baseline model to richer multivariate specifications is
+consistent with good modelling practice in applied research. Rather than beginning with the
+most complex specification, the report uses three models to show how explanatory power
+changes as additional variables and structural features are introduced.
+2.9 Structural Breaks, Crises, and Global Event
+Dummies
+One of the major limitations of smooth forecasting models is that they often struggle when
+historical data contain major shocks or regime changes. Financial crises, pandemics, wars,
+and energy shocks can create abrupt deviations from ordinary economic patterns. In such
+settings, structural break awareness becomes essential.
+The literature on forecasting under structural change suggests that model performance may
+deteriorate if crisis periods are treated as ordinary observations. In practical applied work,
+one common response is to include dummy variables for historically exceptional periods.
+While event dummies do not fully solve the problem of causal identification, they offer a
+transparent way to represent major disturbances in a forecasting-oriented regression.
+This logic strongly supports the inclusion of global event dummies in the present project. The
+Asian Financial Crisis, Global Financial Crisis, COVID shock, COVID rebound, and
+Ukraine-energy shock period were all large macroeconomic disturbances with international
+spillover effects. Representing them explicitly allows the model to distinguish ordinary
+development patterns from globally disruptive episodes.
+2.10 Interpretable Models Versus Black-Box Prediction
+Recent forecasting studies increasingly apply machine learning methods such as Random
+Forest, XGBoost, support vector regression, and deep learning. These approaches can
+model non-linear relationships and interactions more flexibly than classical econometric
+models. However, their advantages come with trade-offs. In academic work, especially at
+undergraduate final-project level, highly complex models can reduce interpretability,
+complicate justification, and make results more difficult to defend.
+For the current project, interpretability is not a weakness but a design principle. The project
+is intended not only to generate predictions, but also to explain why the predictions behave
+as they do. This makes classical time-series models and interpretable regression
+frameworks especially appropriate. They allow the study to evaluate model quality while
+preserving clear connections between theory, variables, and results.
+2.11 Research Gap and Project Contribution
+The main contribution of this project is not the invention of a new forecasting algorithm.
+Rather, its value lies in integrating several academically important components into one
+coherent workflow:
+●
+a merged international panel dataset with macroeconomic and demographic
+●
+●
+●
+●
+●
+variables;
+separate time-series models for key indicators;
+progressive GDP model building from baseline to fuller specification;
+explicit incorporation of global event dummies;
+transparent evaluation using both fit and forecast metrics; and
+deployment through an interactive Streamlit dashboard.
+Many small-scale student projects stop at exploratory charts or single-model forecasting. By
+contrast, this project combines theory, modelling, evaluation, and deployment in a structured
+and interpretable way. This gives it a stronger academic position and a clearer practical
+contribution.
+2.12 Chapter Summary
+The literature shows that GDP per capita is shaped by multiple structural and
+macroeconomic forces rather than a single deterministic factor. Growth theory supports the
+importance of labour, human capital, and productivity. Development literature supports the
+use of life expectancy as a proxy for long-run human capability. Macroeconomic research
+justifies the inclusion of inflation and unemployment. Digital development studies support the
+use of internet access as a structural modernisation indicator. Forecasting literature supports
+the use of transparent time-series models for annual macro data, while structural break logic
+justifies the use of event dummies.
+Taken together, the literature provides strong support for the modelling strategy used in this
+project: separate indicator-level forecasting combined with progressive, interpretable GDP
+prediction models.
+Chapter 3. Methodology
+3.1 Research Design
+This study follows an applied quantitative design. It combines exploratory data analysis,
+time-series forecasting, regression-based GDP modelling, and interactive dashboard
+deployment. The workflow was intentionally organised in stages so that each part supports
+the next: data collection, cleaning, panel construction, exploratory analysis, separate
+time-series modelling, multivariate GDP modelling, and final deployment.
+This design supports reproducibility because each stage produces intermediate outputs that
+are reused later. It also supports academic clarity because the report can distinguish
+between descriptive analysis, indicator-level forecasting, and GDP prediction modelling.
+3.2 Data Sources
+The project uses annual country-level datasets for GDP per capita, population, life
+expectancy, inflation, unemployment, individuals using the Internet, and World Bank country
+metadata. These datasets were selected because they provide broad cross-country
+coverage and allow GDP per capita to be analysed together with demographic,
+macroeconomic, and technological indicators.
+3.3 Data Preparation and Panel Construction
+The raw datasets were originally stored in wide format and then transformed into long
+country-year format. They were merged by country_code and year, after which World
+Bank regional metadata were attached. Additional engineered variables were then created,
+including log transformations and next-year GDP targets.
+The final extended panel contains 11,373 rows, 25 columns, 214 countries, 7 World Bank
+regions, and the year range 1960 to 2023. However, the sample used for the richer GDP
+models is smaller because some macroeconomic variables are incomplete. After listwise
+deletion for the full set of required predictors, the main GDP modelling subset contains 4,722
+observations over the period 1991 to 2022.
+3.4 Feature Engineering
+The most important engineered variables are:
+●
+●
+●
+●
+●
+●
+●
+●
+●
+●
+target_log_gdp_next_year
+log_population_total
+asian_financial_crisis_9798
+global_financial_crisis_0809
+covid_shock_2020
+covid_rebound_2021
+ukraine_energy_shock_2022_2024
+inflation_pct_clean
+unemployment_pct_clean
+internet_users_pct_clean
+The use of a next-year target aligns the model with forecasting logic. Log transformation is
+used to improve scale stability. Event dummies are introduced to represent structural shocks
+that may not be captured by ordinary trend variables.
+3.5 Exploratory Analysis Strategy
+Before modelling, the project explores the data descriptively at global, regional, and country
+levels. This stage examines long-term trends, missingness, regional differences, and major
+shock years. The purpose of EDA is not only visual understanding but also model
+justification. It helps determine whether the indicators behave smoothly or irregularly,
+whether transformations are required, and whether region and event structure should be
+retained in the forecasting models.
+3.6 Separate Time-Series Modelling
+Three separate time-series tasks were conducted:
+●
+●
+●
+GDP per capita forecasting
+Population forecasting
+Life expectancy forecasting
+Each task uses a rolling 10-year window with one-step-ahead forecasting. This means that
+for each valid country-year observation, the model uses the previous 10 years to predict the
+next year. This design is more realistic than fitting on the full series and testing on the same
+observations.
+Candidate models differ by indicator:
+●
+●
+●
+GDP: Naive, ARIMA, AutoReg
+Life Expectancy: Naive, Holt, AutoReg
+Population: LogHolt, Naive, AutoReg
+3.7 Main GDP Models
+Three main GDP models were built using pooled ordinary least squares with robust HC3
+standard errors.
+Model 1: Baseline
+target_log_gdp_next_year ~ log_population_total +
+life_expectancy_years
+Model 2: Extended
+target_log_gdp_next_year ~ log_population_total +
+life_expectancy_years + inflation_pct_clean + unemployment_pct_clean
++ internet_users_pct_clean
+Model 3: Full Forecasting Model
+target_log_gdp_next_year ~ log_population_total +
+life_expectancy_years + inflation_pct_clean + unemployment_pct_clean
++ internet_users_pct_clean + asian_financial_crisis_9798 +
+global_financial_crisis_0809 + covid_shock_2020 + covid_rebound_2021
++ ukraine_energy_shock_2022_2024 + C(wb_region) + year_trend
+Model 1 provides a simple interpretable baseline. Model 2 adds macroeconomic and
+technological variables. Model 3 extends the framework further by adding event structure,
+region effects, and a time trend.
+3.8 Evaluation Design
+The project uses multiple evaluation criteria because no single metric fully captures model
+performance:
+●
+●
+●
+●
+●
+●
+●
+MAE measures average absolute error;
+RMSE penalises larger errors more heavily;
+MAPE expresses error relative to actual values;
+R² indicates explained variation;
+AIC and BIC compare in-sample model fit and complexity;
+rolling 10-year backtesting is used for separate time-series evaluation;
+A shared time-based train-test split is used to compare the three GDP models.
+For the shared GDP evaluation, training uses feature years up to 2017 and testing uses
+feature years from 2018 to 2022.
+3.9 Dashboard Deployment
+The final stage of the project deploys the analytical outputs through Streamlit. The
+dashboard integrates descriptive analysis, model summaries, backtest inspection, and future
+forecasting into one interface. This is an important methodological component because it
+demonstrates how model outputs can be communicated and explored interactively.
+Chapter 4. Exploratory Analysis and
+Descriptive Findings
+4.1 Dataset Profile
+The final extended panel contains 11,373 country-year observations, 214 countries, 7 World
+Bank regions, and annual data from 1960 to 2023. However, the modelling sample is smaller
+when additional drivers such as inflation, unemployment, and internet usage are required.
+After listwise deletion, the richer GDP-model sample falls to 4,722 observations, 177
+countries, and the period 1991 to 2022.
+This reduction in sample size is methodologically important. It shows that model complexity
+creates a trade-off between explanatory richness and data coverage. In other words, richer
+models may be more informative, but they do not necessarily apply to the full historical
+panel.
+Metrics Value
+Extended panel 11,373 observations
+Countries 214
+Regions 7
+Full year range 1960 to 2023
+Main-model subset after listwise
+deletion
+4,722 observations
+Main-model year range 1991 to 2022
+Table 4.1. Dataset coverage summary.
+●
+●
+●
+●
+●
+Extended panel: 11,373 observations
+Countries: 214
+Regions: 7
+Full year range: 1960 to 2023
+Main-model subset after listwise deletion: 4,722 observations
+●
+Main-model year range: 1991 to 2022
+4.2 Missingness and Data Availability
+The core variables GDP per capita, population, and life expectancy are complete in the final
+merged panel. By contrast, the additional macroeconomic variables are much less complete.
+Variable Non-null observations Missing share (%)
+GDP per capita 11,373 0.00
+Population total 11,373 0.00
+Life expectancy 11,373 0.00
+Inflation 8,653 23.92
+Unemployment 6,023 47.04
+Internet users 5,943 47.74
+Table 4.2. Missingness and data availability in the extended panel.
+●
+●
+●
+inflation_pct_clean: 8,653 non-null observations; missing share 23.92%
+unemployment_pct_clean: 6,023 non-null observations; missing share 47.04%
+internet_users_pct_clean: 5,943 non-null observations; missing share 47.74%
+This pattern has direct consequences for model design. Model 1 can be estimated on a
+broad country-year sample because it uses only population and life expectancy. Models 2
+and 3 rely on additional variables that reduce usable coverage substantially. Therefore,
+comparisons between models must distinguish between richer specification and narrower
+sample applicability.
+Figure 4.1. Missing-data structure across core and extended indicators.
+[Insert a bar chart or completeness heatmap here.]
+4.3 Global Spatial Distribution of Key Indicators
+To complement the descriptive tables, spatial visualisation was used to examine how the
+three core indicators are distributed across countries. Choropleth maps provide a clear
+global overview of development inequality and make it easier to identify regional patterns
+that may not be immediately visible from summary statistics alone. In this project, GDP per
+capita, life expectancy, and population were visualised geographically in order to support the
+broader interpretation of cross-country heterogeneity.
+Figure 4.4. Global distribution of GDP per capita in 1960 and 2023.
+Figure 4.5. Global distribution of life expectancy in 1960 and 2023.
+Figure 4.2 presents the global distribution of life expectancy in 1990 and 2023. Compared
+with the earlier period, many countries show clear improvement in life expectancy over time.
+However, important disparities remain, especially between high-income regions and more
+vulnerable low-income economies. The broad similarity between the GDP per capita map
+and the life expectancy map suggests that health outcomes and economic development are
+closely connected at the global level. This strengthens the justification for using life
+expectancy as a key explanatory variable in the GDP models.
+Figure 4.6. Global distribution of population in 1960 and 2023.
+Figure 4. illustrates the spatial distribution of population in 1960 and 2023. The largest
+population concentrations remain in economies such as India, China, the United States,
+Indonesia, and Brazil. Unlike GDP per capita and life expectancy, the population map does
+not directly reflect development level. Instead, it highlights national scale. This distinction is
+important because it reinforces the methodological choice to forecast GDP per capita rather
+than total GDP. A large population does not necessarily imply high income per person.
+Taken together, these maps provide an important spatial context for the modelling stages.
+GDP per capita and life expectancy display strong global development gradients, while
+population follows a different spatial logic. These patterns support the use of GDP per capita
+as the primary target variable and help justify the inclusion of life expectancy and region
+structure in the fuller forecasting models.
+4.4 Regional Differences in 2023
+The 2023 regional averages reveal a clear global development gradient. Mean GDP per
+capita was highest in North America at approximately US$89,285.68, followed by Europe
+and Central Asia at US$42,351.41. At the lower end, Sub-Saharan Africa had a mean GDP
+per capita of only US$2,596.16. Life expectancy showed a similar pattern, with North
+America averaging 80.78 years and Sub-Saharan Africa averaging 64.61 years.
+Region Mean GDP per
+capita (US$)
+Mean life
+expectancy
+(years)
+Mean population
+North America 89,285.68 80.78 125,651,500
+Europe and
+Central Asia
+42,351.41 78.95 16,511,620
+Middle East,
+North Africa,
+Afghanistan and
+Pakistan
+18,824.53 75.94 34,991,240
+East Asia and
+Pacific
+18,339.33 73.79 70,739,120
+Latin America
+and Caribbean
+17,369.66 74.99 17,011,190
+South Asia 4,446.88 74.75 277,096,800
+Sub-Saharan
+Africa
+2,596.16 64.61 27,063,830
+Table 4.3. Regional averages in 2023.
+●
+●
+●
+●
+●
+●
+●
+North America: GDP per capita US$89,285.68; life expectancy 80.78 years
+Europe and Central Asia: GDP per capita US$42,351.41; life expectancy 78.95 years
+Middle East, North Africa, Afghanistan and Pakistan: GDP per capita US$18,824.53;
+life expectancy 75.94 years
+East Asia and Pacific: GDP per capita US$18,339.33; life expectancy 73.79 years
+Latin America and Caribbean: GDP per capita US$17,369.66; life expectancy 74.99
+years
+South Asia: GDP per capita US$4,446.88; life expectancy 74.75 years
+Sub-Saharan Africa: GDP per capita US$2,596.16; life expectancy 64.61 years
+These regional differences justify the inclusion of regional structure in the full GDP model.
+Without region effects, a pooled model would ignore persistent differences in development
+level, historical trajectory, and structural composition.
+Figure 4.2. Mean GDP per capita by World Bank region in 2023.
+4.5 Country-Level Extremes
+Country-level dispersion in GDP per capita is also extremely wide. The highest values in
+2023 were observed in Monaco, Liechtenstein, Luxembourg, Bermuda, and Ireland. The
+lowest values were found in Burundi, Afghanistan, the Central African Republic,
+Madagascar, and Somalia. This very large cross-country scale gap provides a strong
+empirical justification for using the log of next-year GDP per capita as the target variable
+rather than the raw level directly.
+4.6 Cross-Indicator Relationships
+A first descriptive correlation analysis suggests that GDP per capita is positively associated
+with both life expectancy and internet usage, while inflation and unemployment show mild
+negative associations.
+Variable GDP
+per
+capita
+Population
+total
+Life
+expectency
+Inflation Unemployment Internet
+users
+GDP per
+capita
+1.000 -0.042 0.529 -0.160 -0.133 0.583
+Population
+total
+-0.042 1.000 0.016 -0.002 -0.084 -0.024
+Life
+expectency
+0.529 0.016 1.000 -0.141 -0.002 0.621
+Inflation -0.160 -0.002 -0.141 1.000 0.048 -0.175
+Unemployment -0.133 -0.084 -0.002 0.048 1.000 -0.037
+Internet users 0.583 -0.024 0.621 -0.175 -0.037 1.000
+Table 4.4. Selected correlations in the extended panel.
+●
+●
+●
+●
+●
+●
+GDP per capita and internet usage: 0.583
+GDP per capita and life expectancy: 0.529
+Life expectancy and internet usage: 0.621
+GDP per capita and inflation: -0.160
+GDP per capita and unemployment: -0.133
+GDP per capita and population: -0.042
+These results are broadly consistent with the theoretical motivation of the project. Countries
+with higher life expectancy and broader internet access tend to have higher per-capita
+output. Inflation and unemployment are negatively associated with GDP per capita, although
+the magnitude is relatively modest. Population shows almost no simple linear relationship
+with GDP per capita in pooled cross-country data, reinforcing the idea that economic scale
+does not automatically translate into higher average income.
+4.7 Long-Term Global and Regional Trends
+Beyond spatial differences, the indicators also display important long-term temporal patterns.
+A global trend analysis helps show whether the core indicators are moving steadily,
+unevenly, or with clear structural breaks over time.
+Figure 4.5. Global mean and median GDP per capita over time.
+Figure 4.5 compares the global mean and median GDP per capita over time. The gap
+between the two measures indicates that the international GDP distribution is right-skewed,
+meaning that a relatively small number of high-income economies pull the global mean
+upward. This reinforces the idea that average global values should be interpreted carefully,
+since they may not reflect the experience of the typical country.
+Figure 4.6. Global mean and median life expectancy over time.
+Figure 4.6 shows that life expectancy increased more steadily than GDP per capita over the
+long run. Both the global mean and median rise through time, suggesting widespread
+long-term health improvement across countries. Compared with GDP, the life expectancy
+series appears smoother and structurally more stable, which helps explain why simple
+persistence-based forecasting performed well in the time-series stage.
+Figure 4.7. Mean GDP per capita by World Bank region over time.
+Figure 4.7 highlights long-term divergence across regions in average GDP per capita.
+High-income regions maintain a large advantage across the entire period, while
+lower-income regions improve more gradually. This reinforces the importance of regional
+context in interpreting GDP dynamics and further supports the use of region effects in Model
+3.
+Figure 4.8. Mean life expectancy by World Bank region over time.
+Source: Author’s visualisation based on the cleaned panel dataset.
+Figure 4.8 shows that life expectancy improved over time across nearly all regions, although
+the pace and level of improvement differed substantially. Some regions achieved
+consistently high outcomes, while others remained lower despite progress. This pattern
+reflects the broader persistence of development inequality and supports the interpretation of
+life expectancy as a meaningful long-run development indicator.
+4.8 Event-Dummy Coverage
+The engineered event variables were assigned to historically important years as follows:
+●
+●
+●
+●
+●
+●
+Asian Financial Crisis: 1997 to 1998
+Global Financial Crisis: 2008 to 2009
+COVID shock: 2020
+COVID rebound: 2021
+Ukraine and energy shock: 2022 to 2023 in the current dataset
+High global rates: 2023 in the current dataset
+These variables are designed as historical shock markers rather than causal identification
+tools. Their purpose is to help the model distinguish extraordinary macroeconomic periods
+from ordinary development trends.
+Figure 4.3. Timeline of global event dummies used in the panel dataset.
+4.9 Chapter Summary
+The exploratory analysis shows that the dataset is rich but unevenly complete, that GDP per
+capita differs strongly across countries and regions, and that life expectancy and internet
+usage are positively associated with development level. It also shows that global shocks and
+regional structure are important enough to justify their inclusion in the fuller GDP model.
+Chapter 5. Time-Series Modelling
+Results
+5.1 Evaluation Design
+The time-series stage uses a rolling 10-year window with one-step-ahead forecasting. For
+each country with sufficient historical data, the model uses the previous 10 years to predict
+the next year. This approach is appropriate for annual macroeconomic and demographic
+data because it mimics a practical forecasting workflow and avoids unrealistic evaluation
+based on full-sample fitting.
+5.2 Overall Model Comparison
+Dataset Candidate
+model
+Best
+model
+MAE RMSE MAPE
+(%)
+R Number of
+predictions
+Countries
+modelled
+GDP Naive,
+ARIMA,
+AutoReg
+Naive 962.
+8993
+2472.1
+792
+15.34
+57
+0.
+9
+8
+5
+3
+9,437 212
+Life
+Expectancy
+Naive,
+Holt,
+AutoReg
+Naive 0.54
+28
+1.4984 0.995
+0
+0.
+9
+7
+9
+7
+11,684 217
+Population LogHolt,
+Naive,
+AutoReg
+LogHo
+lt
+70,2
+65.2
+708
+316,54
+7.7427
+0.580
+1
+0.
+9
+9
+9
+9
+9
+2
+11,905 217
+Table 5.1. Best time-series model by indicator.
+●
+●
+●
+GDP: Best model = Naive; MAE = 962.8993; RMSE = 2472.1792; MAPE =
+15.3457%; R² = 0.9853; predictions = 9,437; countries = 212
+Life Expectancy: Best model = Naive; MAE = 0.5428; RMSE = 1.4984; MAPE =
+0.9950%; R² = 0.9797; predictions = 11,684; countries = 217
+Population: Best model = LogHolt; MAE = 70,265.2708; RMSE = 316,547.7427;
+MAPE = 0.5801%; R² = 0.999992; predictions = 11,905; countries = 217
+These results indicate that different indicators require different modelling logic. GDP and life
+expectancy are best predicted by a persistence-based Naive benchmark, while population is
+better captured by a log-trend smoothing model.
+5.3 GDP Time-Series Results
+For GDP per capita, the Naive model outperformed ARIMA and AutoReg in the rolling
+10-year evaluation. This suggests that annual GDP per capita is highly persistent and that
+the previous year often provides a strong one-step-ahead benchmark. In this setting, more
+complex models did not consistently improve accuracy across countries.
+This finding is not unusual in macroeconomic forecasting. When data are annual and
+country-specific histories are not extremely long, simple persistence models can remain
+highly competitive. Therefore, the strong performance of the Naive model should be
+interpreted as an empirical result rather than as evidence of methodological weakness.
+Figure 5.1. Best-model GDP forecast versus actual values for Monaco under rolling
+10-year backtesting.
+Figure 5. shows the country-level behaviour of the selected GDP time-series model against
+the actual GDP per capita series. The forecasted series broadly follows the long-run upward
+movement of GDP per capita, indicating that the selected model captures the general level
+and direction of economic change reasonably well. However, the visual gap between the
+predicted and actual series is still larger than in the life expectancy and population cases,
+especially around sharper movements and local turning points.
+This pattern is consistent with the earlier evaluation results showing that GDP is the most
+volatile of the three core series. Even when the Naive model performs best overall, it tends
+to lag sudden increases or decreases because it projects the next year largely from the most
+recent observed value. Therefore, the figure confirms an important methodological point of
+the project: GDP is forecastable to a useful degree, but its dynamics remain more sensitive
+to shocks and short-run fluctuations than the demographic indicators.
+Figure 5.1. GDP time-series model comparison under rolling backtesting.
+5.4 Life Expectancy Time-Series Results
+Life expectancy also favoured the Naive model, with Holt performing slightly worse and
+AutoReg performing much more poorly. This is consistent with the smooth and gradual
+nature of life expectancy change. In many countries, life expectancy evolves through slow
+structural improvement rather than abrupt annual fluctuation. As a result, the most recent
+observed value is often a strong predictor of the next year.
+Although Holt is still a reasonable choice for smooth extrapolation, the backtest results show
+that Naive provides the most reliable one-step-ahead performance in the current data.
+Figure 5.. Best-model life expectancy forecast versus actual values for Andorra under
+rolling 10-year backtesting.
+Figure 5. demonstrates that the selected life expectancy model tracks the observed series
+very closely across most of the historical period. The predicted line almost overlaps with the
+actual line, which visually confirms the strong backtesting performance reported earlier.
+Deviations are generally small and become more noticeable only around abrupt
+disturbances, particularly during the pandemic-related disruption period.
+This result is methodologically intuitive. Life expectancy usually evolves gradually through
+long-run structural improvement rather than through sharp year-to-year volatility. As a result,
+a simple model such as Naive can perform very well in one-step-ahead forecasting because
+the most recent observation already contains substantial predictive information about the
+next year. The figure therefore supports the conclusion that life expectancy is the smoothest
+and most stable of the three main time-series considered in the project.
+5.5 Population Time-Series Results
+Population forecasting produced a different pattern. The best-performing model was
+LogHolt, with exceptionally strong results across MAE, RMSE, MAPE, and R²
+. This is
+methodologically intuitive because population usually changes through gradual
+compounding growth rather than short-run volatility. A log-scale smoothing model is
+therefore well suited to this type of demographic series.
+The much weaker performance of AutoReg further suggests that short-lag autoregressive
+structure is less useful than long-run smoothed trend for annual population data.
+Figure 5.6. Best-model population forecast versus actual values for China under
+rolling 10-year backtesting.
+Figure 5.6 shows an extremely close alignment between the predicted and actual population
+series, with the two lines remaining nearly indistinguishable across most years. This
+provides strong visual support for the excellent quantitative performance of the LogHolt
+model reported in the model comparison section. The selected model captures both the
+long-run upward movement and the gradual flattening of the series very effectively.
+The result is also theoretically consistent with the nature of annual population data.
+Population tends to change through slow compounding growth rather than abrupt short-run
+variation, making it well suited to a smoothed log-scale trend model. Compared with GDP,
+the population series is much more predictable; compared with life expectancy, it combines
+smoothness with large-scale cumulative growth. The figure therefore reinforces the
+conclusion that LogHolt is highly appropriate for population forecasting in this project.
+5.6 Role of the Time-Series Stage in the Full Workflow
+The separate indicator models are not isolated sub-tasks. They serve a direct purpose in the
+full GDP forecasting workflow because they can be used to generate future values of
+population, life expectancy, inflation, unemployment, and internet usage before those values
+are passed into the GDP models. In other words, the time-series stage supports the
+construction of future feature tables, which are then used to estimate GDP per capita for a
+user-selected future target year.
+5.7 Chapter Summary
+The time-series results show that indicator behaviour differs substantially across datasets.
+GDP and life expectancy are well represented by simple persistence, while population is
+better represented by smoothed log-trend growth. These findings support the project’s
+decision to model the indicators separately before combining them in the main GDP
+forecasting framework.
+Chapter 6. Main GDP Model Results
+6.1 In-Sample Explanatory Comparison
+The first comparison of the three GDP models uses the full modelling sample available for
+each specification.
+Table 6.1. In-sample summary comparison of the three GDP models.
+●
+Model 1 - Baseline: R² = 0.6950; Adjusted R² = 0.6948; AIC = 11927.8938; BIC
+●
+●
+= 11947.2738
+Model 2 - Extended: R² = 0.7484; Adjusted R² = 0.7481; AIC = 11024.2695;
+BIC = 11063.0294
+Model 3 - Full Forecasting Model: R² = 0.7983; Adjusted R² = 0.7976; AIC =
+10003.7829; BIC = 10120.0627
+The pattern is clear. As the model expands from a demographic baseline to a broader
+macroeconomic and structural specification, the fit improves and both AIC and BIC
+decrease. This suggests that the additional variables contribute meaningful explanatory
+information rather than merely increasing complexity.
+6.2 Shared Train-Test Comparison
+To make the comparison more rigorous, a second evaluation was conducted on a common
+sample using a shared time-based split. Training uses feature years up to 2017, while testing
+uses feature years from 2018 to 2022. The common modelling subset contains 4,722
+observations, of which 3,909 belong to the training period and 813 belong to the test period.
+Table 6.2. Shared test performance of the three main GDP models.
+●
+●
+●
+Model 1 - Baseline: Test MAE = 8,831.5736; Test RMSE = 17,383.9719; Test MAPE
+= 65.1570%; Test level R² = 0.4139; Test log MAE = 0.6169; Test log RMSE =
+0.7649; Test log R² = 0.7077
+Model 2 - Extended: Test MAE = 7,902.4876; Test RMSE = 12,185.6670; Test MAPE
+= 106.1816%; Test level R² = 0.7120; Test log MAE = 0.6302; Test log RMSE =
+0.7924; Test log R² = 0.6864
+Model 3 - Full: Test MAE = 6,271.8990; Test RMSE = 11,599.7431; Test MAPE =
+59.7330%; Test level R² = 0.7390; Test log MAE = 0.4656; Test log RMSE =
+0.6168; Test log R² = 0.8100
+These results show that Model 3 is the strongest overall specification on the held-out test
+period. It produces the lowest MAE and RMSE on level GDP per capita, the lowest error on
+log scale, and the highest R² in both level and log evaluation.
+Model 1 remains useful as an interpretable benchmark, but its predictive performance is
+clearly weaker. Model 2 improves substantially over Model 1 in level RMSE and level R²
+,
+demonstrating that inflation, unemployment, and internet usage add useful signals. However,
+Model 3 remains the best overall model once region effects and event structure are included.
+The unusually high MAPE for Model 2 should be interpreted with caution. Percentage-based
+metrics can become unstable when actual GDP per capita values are very small, because
+moderate absolute errors then translate into very large percentage deviations. For
+cross-country GDP analysis, RMSE, MAE, and log-scale performance often provide a more
+reliable basis for judgment than MAPE alone.
+Figure 6.1. Comparative test performance of GDP Models 1 to 3.
+[Insert a grouped bar chart for RMSE, MAE, and R² here.]
+6.3 Interpretation of Key Coefficients
+Several patterns in the coefficient tables are analytically meaningful.
+First, life_expectancy_years remains positive and highly significant across the main
+models. This supports the broader literature linking health and human development to
+stronger economic performance. In this context, life expectancy appears to be a robust proxy
+for underlying development capacity.
+Second, log_population_total is negative in the GDP per capita models. This should
+not be misread as a claim that population harms the economy. Because the target is GDP
+per capita rather than total GDP, the negative sign simply indicates that larger population
+size alone does not guarantee higher output per person once other variables are controlled
+for.
+Third, internet_users_pct_clean is positive and strongly significant in Models 2 and 3.
+This is consistent with the descriptive evidence that digital access is associated with more
+advanced development conditions and, potentially, stronger productivity.
+Fourth, inflation_pct_clean is negative in the richer models, which aligns with the
+argument that macroeconomic instability tends to be associated with weaker per-capita
+output performance.
+Finally, unemployment_pct_clean is positive in the fitted models, which appears
+counterintuitive. This is one of the clearest reminders that the model should not be
+interpreted causally. In a pooled international panel, sign reversals may arise due to
+multicollinearity, omitted institutional differences, labour market structure, or cross-country
+composition effects.
+6.4 Region Effects and Structural Heterogeneity
+The inclusion of region effects in Model 3 is justified both descriptively and statistically. The
+exploratory analysis showed substantial regional differences in GDP per capita and life
+expectancy, and the fuller model confirms that these structural differences remain relevant
+even after controlling for the included predictors.
+This is important because a purely pooled model without region structure risks blending
+together development patterns that differ sharply across high-income, middle-income, and
+low-income regions. By including C(wb_region), Model 3 acknowledges that countries do
+not operate within a uniform economic environment.
+6.5 Interpretation of Event Dummies
+The event terms must be discussed carefully. In the full-sample analysis, event dummies
+improve explanatory fit because they help capture historically unusual periods. However, in
+the strict train-test evaluation, some event variables such as the COVID shock and the
+Ukraine-energy shock lie outside the training window. This means they cannot be learned in
+the usual way from pre-2018 training data.
+This creates an important academic distinction. In full-sample modelling, event dummies
+function as explanatory historical controls. In genuine future forecasting, however, the effect
+of future shocks cannot be estimated directly unless similar events exist in the training data.
+In practice, such variables must be treated as scenario assumptions rather than ordinary
+predictors. This is an important strength of the report because it demonstrates
+methodological awareness rather than overclaiming forecasting ability.
+6.6 Regional Test Behaviour
+The shared test evaluation also shows that performance varies by region. Model 3
+performed relatively well in South Asia, East Asia and Pacific, and the Middle East, North
+Africa, Afghanistan and Pakistan group. However, performance remained weaker in North
+America and parts of Sub-Saharan Africa, where either the sample is small or the regional
+structure is highly heterogeneous. This indicates that even the strongest pooled model
+cannot perfectly represent every regional pattern.
+6.7 Overall Interpretation of the Main Models
+Taken together, the evidence suggests a clear hierarchy. Model 1 is useful as a simple,
+interpretable baseline. Model 2 strengthens predictive performance by adding
+macroeconomic and digital indicators. Model 3 is the strongest overall specification because
+it combines demographic, macroeconomic, technological, regional, and event-based
+structure within one forecasting-oriented framework.
+6.8 Chapter Summary
+The main-model results show that broader macroeconomic and structural information
+improves both explanatory fit and out-of-sample predictive quality. Model 3 is the best overall
+candidate for the final report and demo, while Models 1 and 2 remain important for
+comparative justification and progressive model development.
+Chapter 7. Dashboard Implementation
+7.1 Purpose of the Dashboard
+The Streamlit dashboard was developed to convert the analytical outputs into an accessible
+decision-support interface. Its purpose is not merely visual presentation, but interactive
+inspection of country trends, model summaries, backtest behaviour, and future forecast
+paths. In an academic context, this deployment stage demonstrates that the project can
+communicate results beyond notebooks and static tables.
+7.2 Dashboard Structure
+The dashboard contains five main tabs:
+1. Project Overview
+2. Time-Series Models
+3. Indicator Trends
+4. Comparison
+5. Forecast Explorer
+The sidebar provides controls for region, country, year range, indicator selection, chart
+theme, and comparison year.
+7.3 Functional Features
+The dashboard supports:
+●
+●
+●
+●
+●
+●
+exploration of GDP per capita, population, and life expectancy across countries and
+regions;
+display of best time-series model summaries for each indicator;
+country-level rolling backtest comparison across multiple model options;
+comparison of indicator values across regions and countries;
+future forecasting to a selected target year;
+interactive presentation of the broader project workflow.
+7.4 Value of the Dashboard to the Project
+The dashboard strengthens the project in three major ways. First, it improves interpretability
+by allowing users to move directly between raw indicators, model summaries, and forecast
+outputs. Second, it increases reproducibility because it uses the same cleaned data and
+result files as the notebooks and report. Third, it adds practical value by demonstrating how
+data science outputs can be translated into a usable and presentation-ready system.
+Figure 7.1. Overview of the Streamlit dashboard interface.
+[Insert a screenshot of the dashboard homepage here.]
+7.5 Chapter Summary
+The Streamlit dashboard is a meaningful part of the final project rather than an optional
+add-on. It demonstrates how analytical findings can be communicated interactively and
+supports the project’s broader aim of interpretability and usability.
+[Page Break]
+Chapter 8. Critical Evaluation,
+Limitations, and Future Work
+8.1 Strengths of the Project
+The project has several strengths. It integrates data engineering, exploratory analysis,
+time-series forecasting, regression modelling, and dashboard deployment within one
+coherent workflow. It distinguishes clearly between indicator-level forecasting and
+multivariate GDP prediction. It prioritises interpretability, which is valuable in an academic
+setting. It also incorporates global event dummies and region effects, which give the model
+more economic realism than a purely mechanical specification.
+8.2 Limitations
+Despite these strengths, several limitations should be acknowledged.
+First, missingness in unemployment and internet usage substantially reduces the usable
+sample for the richer models. Second, the GDP models are pooled OLS specifications rather
+than full country fixed-effects or dynamic panel models. Third, the event dummies are
+manually engineered from historically known periods and therefore depend partly on
+researcher judgement. Fourth, MAPE is unstable when actual GDP per capita values are
+very small. Fifth, future shocks cannot always be learned directly from a pre-shock training
+sample and must therefore be treated as scenario assumptions.
+These limitations do not invalidate the findings, but they define the scope of what the study
+can claim.
+8.3 Why Black-Box Machine Learning Was Not the Core
+Choice
+Methods such as Random Forest, XGBoost, Prophet, or LSTM could have been included as
+advanced benchmarks. However, the current project intentionally prioritises models that are
+easier to explain, justify, and defend. For a final-year academic project, interpretability is
+especially important because the report must not only present results, but also explain how
+and why those results emerge.
+8.4 Future Improvements
+Several future extensions could strengthen the work further:
+●
+●
+●
+●
+●
+●
+adding country fixed effects or dynamic panel techniques;
+testing ARIMAX or SARIMAX with exogenous drivers;
+comparing interpretable models against machine learning benchmarks such as
+Random Forest or XGBoost;
+formalising future event scenarios rather than assuming smooth continuation;
+adding uncertainty intervals around future forecasts;
+exploring principled missing-data treatment or balanced-panel design.
+8.5 Critical Reflection
+A key lesson of the project is that forecasting quality depends not only on model complexity,
+but also on data quality, variable definition, evaluation design, and the distinction between
+historical fit and genuine future uncertainty. In this sense, the project is academically
+valuable because it demonstrates methodological awareness rather than merely numerical
+optimisation.
+Chapter 9. Conclusion
+This project developed an interpretable GDP per capita forecasting workflow using
+demographic, macroeconomic, technological, and event-based information from open
+international datasets. It combined three major strands of work: exploratory analysis of
+country-year indicators, separate rolling time-series modelling for GDP, population, and life
+expectancy, and progressive GDP regression models ranging from a simple baseline to a
+fuller forecasting-oriented specification.
+The results show that separate indicator forecasting is both feasible and informative. Under
+a rolling 10-year backtest design, the best models were Naive for GDP, Naive for life
+expectancy, and LogHolt for population. For the main GDP models, both in-sample and
+shared test evidence show that Model 3 is the strongest overall specification. It delivers the
+best balance of demographic, macroeconomic, regional, and event-aware information while
+remaining interpretable.
+At the same time, the report also makes clear that forecasting in this setting has limitations.
+Missing data reduce the usable sample for richer models, pooled international structure
+complicates coefficient interpretation, and major future shocks cannot always be inferred
+from historical patterns alone. These limitations are not weaknesses to hide; rather, they are
+part of a rigorous academic interpretation of the modelling process.
+Overall, the project meets its aim of building a transparent, academically defensible, and
+practically demonstrable GDP forecasting system. It also provides a strong foundation for
+future development through richer econometric methods, scenario analysis, uncertainty
+estimation, and machine learning benchmarking.
+References
+Acemoglu, D. (2009) Introduction to Modern Economic Growth. Princeton: Princeton
+University Press.
+Becker, G.S. (1964) Human Capital: A Theoretical and Empirical Analysis, with Special
+Reference to Education. New York: Columbia University Press.
+Bloom, D.E., Canning, D. and Sevilla, J. (2004) ‘The effect of health on economic growth: A
+production function approach’
+, World Development, 32(1), pp. 1-13.
+Czernich, N., Falck, O., Kretschmer, T. and Woessmann, L. (2011) ‘Broadband infrastructure
+and economic growth’
+, The Economic Journal, 121(552), pp. 505-532.
+Fischer, S. (1993) ‘The role of macroeconomic factors in growth’
+, Journal of Monetary
+Economics, 32(3), pp. 485-512.
+Hamilton, J.D. (1994) Time Series Analysis. Princeton: Princeton University Press.
+Hyndman, R.J. and Athanasopoulos, G. (2021) Forecasting: Principles and Practice. 3rd
+edn. Melbourne: OTexts.
+Mankiw, N.G., Romer, D. and Weil, D.N. (1992) ‘A contribution to the empirics of economic
+growth’
+, The Quarterly Journal of Economics, 107(2), pp. 407-437.
+Okun, A.M. (1962) Potential GNP: Its Measurement and Significance. Proceedings of the
+Business and Economic Statistics Section of the American Statistical Association.
+Romer, P.M. (1990) ‘Endogenous technological change’
+, Journal of Political Economy, 98(5),
+pp. S71-S102.
+Schultz, T.W. (1961) ‘Investment in human capital’
+, The American Economic Review, 51(1),
+pp. 1-17.
+Seabold, S. and Perktold, J. (2010) ‘Statsmodels: Econometric and statistical modeling with
+Python’
+, in Proceedings of the 9th Python in Science Conference. Austin, Texas, pp. 57-61.
+Solow, R.M. (1956) ‘A contribution to the theory of economic growth’
+, The Quarterly Journal
+of Economics, 70(1), pp. 65-94.
+Streamlit Inc. (2024) Streamlit Documentation. Available at: https://docs.streamlit.io
+World Bank (2016) World Development Report 2016: Digital Dividends. Washington, DC:
+World Bank.
+World Bank (2024) World Development Indicators. Available at: https://data.worldbank.org

@@ -1,0 +1,4 @@
+model,model_family,split,scale,n_obs,alpha,l1_ratio,MAE,RMSE,MAPE_pct,R_squared
+Elastic Net Model 2 - Extended Dynamic,Regularized Linear ML,test,level_gdp_usd,813,0.005,0.9,1486.9078,3468.6213,9.1557,0.9767
+Elastic Net Model 3 - Full Dynamic,Regularized Linear ML,test,level_gdp_usd,813,0.005,0.9,1487.8599,3476.2812,9.1411,0.9766
+Elastic Net Model 1 - Baseline Dynamic,Regularized Linear ML,test,level_gdp_usd,1042,0.0005,0.9,1702.1639,3977.374,9.3014,0.9821

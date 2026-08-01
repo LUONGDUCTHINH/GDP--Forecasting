@@ -1,0 +1,5 @@
+split,scale,model,n_obs,MAE,RMSE,MAPE_pct,R_squared
+train,level_gdp_usd,Model 3 - Full Forecasting,3909,4675.362,9163.3027,63.3526,0.7176
+train,log_gdp,Model 3 - Full Forecasting,3909,0.5496,0.7129,7.0355,0.791
+test,level_gdp_usd,Model 3 - Full Forecasting,813,6271.899,11599.7431,59.733,0.739
+test,log_gdp,Model 3 - Full Forecasting,813,0.4656,0.6168,5.615,0.81

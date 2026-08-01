@@ -1,0 +1,13 @@
+model,model_family,model_note,split,scale,n_obs,MAE,RMSE,MAPE_pct,R_squared
+Model 1 - Baseline,Pooled OLS forecast model,Uses population and life expectancy only.,train,level_gdp_usd,3909,6447.5561,12886.9023,86.6979,0.4415
+Model 1 - Baseline,Pooled OLS forecast model,Uses population and life expectancy only.,train,log_gdp,3909,0.6986,0.8731,8.8383,0.6865
+Model 1 - Baseline,Pooled OLS forecast model,Uses population and life expectancy only.,test,level_gdp_usd,813,8831.5736,17383.9719,65.157,0.4139
+Model 1 - Baseline,Pooled OLS forecast model,Uses population and life expectancy only.,test,log_gdp,813,0.6169,0.7649,7.2227,0.7077
+Model 2 - Extended,Pooled OLS forecast model,"Adds inflation, unemployment, and internet usage.",train,level_gdp_usd,3909,5462.6648,10381.3327,70.565,0.6375
+Model 2 - Extended,Pooled OLS forecast model,"Adds inflation, unemployment, and internet usage.",train,log_gdp,3909,0.6131,0.7834,7.7,0.7476
+Model 2 - Extended,Pooled OLS forecast model,"Adds inflation, unemployment, and internet usage.",test,level_gdp_usd,813,7902.4876,12185.667,106.1816,0.712
+Model 2 - Extended,Pooled OLS forecast model,"Adds inflation, unemployment, and internet usage.",test,log_gdp,813,0.6302,0.7924,7.7398,0.6864
+Model 3 - Full Forecasting,Pooled OLS forecast model,Forecast-ready Model 3. Uses region effects and a linear year trend. Post-2017 global event dummies are excluded from the backtest because they do not appear in the training window.,train,level_gdp_usd,3909,4675.362,9163.3027,63.3526,0.7176
+Model 3 - Full Forecasting,Pooled OLS forecast model,Forecast-ready Model 3. Uses region effects and a linear year trend. Post-2017 global event dummies are excluded from the backtest because they do not appear in the training window.,train,log_gdp,3909,0.5496,0.7129,7.0355,0.791
+Model 3 - Full Forecasting,Pooled OLS forecast model,Forecast-ready Model 3. Uses region effects and a linear year trend. Post-2017 global event dummies are excluded from the backtest because they do not appear in the training window.,test,level_gdp_usd,813,6271.899,11599.7431,59.733,0.739
+Model 3 - Full Forecasting,Pooled OLS forecast model,Forecast-ready Model 3. Uses region effects and a linear year trend. Post-2017 global event dummies are excluded from the backtest because they do not appear in the training window.,test,log_gdp,813,0.4656,0.6168,5.615,0.81

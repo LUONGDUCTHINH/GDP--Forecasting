@@ -1,0 +1,433 @@
+spec,algorithm,plot_year,mean_gdp,segment
+Model 1,Actual,2000,7145.4809,train_actual
+Model 1,Actual,2001,7014.7569,train_actual
+Model 1,Actual,2002,7216.1784,train_actual
+Model 1,Actual,2003,8244.8198,train_actual
+Model 1,Actual,2004,9622.9956,train_actual
+Model 1,Actual,2005,10502.969,train_actual
+Model 1,Actual,2006,11298.6274,train_actual
+Model 1,Actual,2007,12839.7884,train_actual
+Model 1,Actual,2008,13999.9457,train_actual
+Model 1,Actual,2009,12571.7681,train_actual
+Model 1,Actual,2010,13472.5618,train_actual
+Model 1,Actual,2011,15027.3425,train_actual
+Model 1,Actual,2012,15032.8104,train_actual
+Model 1,Actual,2013,15335.7847,train_actual
+Model 1,Actual,2014,15390.2246,train_actual
+Model 1,Actual,2015,13540.3736,train_actual
+Model 1,Actual,2016,13611.9756,train_actual
+Model 1,Actual,2017,14470.2808,train_actual
+Model 1,Actual,2018,15718.373,train_actual
+Model 1,Actual,2019,15698.9605,test_actual
+Model 1,Actual,2020,14549.3612,test_actual
+Model 1,Actual,2021,17155.0981,test_actual
+Model 1,Actual,2022,18048.6179,test_actual
+Model 1,Actual,2023,18914.0876,test_actual
+Model 1,Elastic Net,2000,7397.0962,train_prediction
+Model 1,Elastic Net,2001,7406.8301,train_prediction
+Model 1,Elastic Net,2002,7095.2376,train_prediction
+Model 1,Elastic Net,2003,7372.7866,train_prediction
+Model 1,Elastic Net,2004,8689.8289,train_prediction
+Model 1,Elastic Net,2005,9909.1433,train_prediction
+Model 1,Elastic Net,2006,10717.3691,train_prediction
+Model 1,Elastic Net,2007,11619.0922,train_prediction
+Model 1,Elastic Net,2008,13037.9265,train_prediction
+Model 1,Elastic Net,2009,14733.6909,train_prediction
+Model 1,Elastic Net,2010,12978.6613,train_prediction
+Model 1,Elastic Net,2011,13865.5595,train_prediction
+Model 1,Elastic Net,2012,15587.7453,train_prediction
+Model 1,Elastic Net,2013,15456.7707,train_prediction
+Model 1,Elastic Net,2014,15858.0306,train_prediction
+Model 1,Elastic Net,2015,15929.2126,train_prediction
+Model 1,Elastic Net,2016,14191.6954,train_prediction
+Model 1,Elastic Net,2017,14107.2713,train_prediction
+Model 1,Elastic Net,2018,15260.9842,train_prediction
+Model 1,Elastic Net,2019,16516.1691,test_prediction
+Model 1,Elastic Net,2020,16301.2837,test_prediction
+Model 1,Elastic Net,2021,15309.5552,test_prediction
+Model 1,Elastic Net,2022,17903.4091,test_prediction
+Model 1,Elastic Net,2023,18731.2406,test_prediction
+Model 1,OLS,2000,7378.2094,train_prediction
+Model 1,OLS,2001,7386.7877,train_prediction
+Model 1,OLS,2002,7074.6937,train_prediction
+Model 1,OLS,2003,7351.2901,train_prediction
+Model 1,OLS,2004,8665.8636,train_prediction
+Model 1,OLS,2005,9881.4698,train_prediction
+Model 1,OLS,2006,10687.9446,train_prediction
+Model 1,OLS,2007,11587.179,train_prediction
+Model 1,OLS,2008,13003.3158,train_prediction
+Model 1,OLS,2009,14694.7278,train_prediction
+Model 1,OLS,2010,12939.8681,train_prediction
+Model 1,OLS,2011,13823.8664,train_prediction
+Model 1,OLS,2012,15540.1361,train_prediction
+Model 1,OLS,2013,15408.3654,train_prediction
+Model 1,OLS,2014,15806.0485,train_prediction
+Model 1,OLS,2015,15873.9951,train_prediction
+Model 1,OLS,2016,14139.0557,train_prediction
+Model 1,OLS,2017,14052.8297,train_prediction
+Model 1,OLS,2018,15202.3163,train_prediction
+Model 1,OLS,2019,16452.9427,test_prediction
+Model 1,OLS,2020,16236.8379,test_prediction
+Model 1,OLS,2021,15254.6461,test_prediction
+Model 1,OLS,2022,17847.2108,test_prediction
+Model 1,OLS,2023,18667.7446,test_prediction
+Model 1,Random Forest,2000,7260.0534,train_prediction
+Model 1,Random Forest,2001,7280.9222,train_prediction
+Model 1,Random Forest,2002,7180.5778,train_prediction
+Model 1,Random Forest,2003,7759.4328,train_prediction
+Model 1,Random Forest,2004,9128.8068,train_prediction
+Model 1,Random Forest,2005,10240.6739,train_prediction
+Model 1,Random Forest,2006,10983.0782,train_prediction
+Model 1,Random Forest,2007,12150.4499,train_prediction
+Model 1,Random Forest,2008,13353.2795,train_prediction
+Model 1,Random Forest,2009,13672.2062,train_prediction
+Model 1,Random Forest,2010,13292.2267,train_prediction
+Model 1,Random Forest,2011,14303.3274,train_prediction
+Model 1,Random Forest,2012,15125.2311,train_prediction
+Model 1,Random Forest,2013,15300.9984,train_prediction
+Model 1,Random Forest,2014,15322.9505,train_prediction
+Model 1,Random Forest,2015,14648.8826,train_prediction
+Model 1,Random Forest,2016,13995.3256,train_prediction
+Model 1,Random Forest,2017,14252.4594,train_prediction
+Model 1,Random Forest,2018,15355.9191,train_prediction
+Model 1,Random Forest,2019,16325.644,test_prediction
+Model 1,Random Forest,2020,16305.0968,test_prediction
+Model 1,Random Forest,2021,15118.8032,test_prediction
+Model 1,Random Forest,2022,17221.4441,test_prediction
+Model 1,Random Forest,2023,18171.5003,test_prediction
+Model 1,Ridge,2000,7399.461,train_prediction
+Model 1,Ridge,2001,7409.2586,train_prediction
+Model 1,Ridge,2002,7097.6005,train_prediction
+Model 1,Ridge,2003,7375.3219,train_prediction
+Model 1,Ridge,2004,8692.8843,train_prediction
+Model 1,Ridge,2005,9912.7899,train_prediction
+Model 1,Ridge,2006,10721.3669,train_prediction
+Model 1,Ridge,2007,11623.4991,train_prediction
+Model 1,Ridge,2008,13042.9399,train_prediction
+Model 1,Ridge,2009,14739.4463,train_prediction
+Model 1,Ridge,2010,12983.6939,train_prediction
+Model 1,Ridge,2011,13871.0137,train_prediction
+Model 1,Ridge,2012,15594.2002,train_prediction
+Model 1,Ridge,2013,15463.1927,train_prediction
+Model 1,Ridge,2014,15864.7852,train_prediction
+Model 1,Ridge,2015,15936.1492,train_prediction
+Model 1,Ridge,2016,14197.818,train_prediction
+Model 1,Ridge,2017,14113.397,train_prediction
+Model 1,Ridge,2018,15267.7048,train_prediction
+Model 1,Ridge,2019,16523.516,test_prediction
+Model 1,Ridge,2020,16308.573,test_prediction
+Model 1,Ridge,2021,15315.8463,test_prediction
+Model 1,Ridge,2022,17910.6714,test_prediction
+Model 1,Ridge,2023,18739.1544,test_prediction
+Model 1,XGBoost,2000,7371.7401,train_prediction
+Model 1,XGBoost,2001,7417.5029,train_prediction
+Model 1,XGBoost,2002,7182.7536,train_prediction
+Model 1,XGBoost,2003,7497.1399,train_prediction
+Model 1,XGBoost,2004,8855.6693,train_prediction
+Model 1,XGBoost,2005,10092.3094,train_prediction
+Model 1,XGBoost,2006,10825.9426,train_prediction
+Model 1,XGBoost,2007,11773.0276,train_prediction
+Model 1,XGBoost,2008,12961.6059,train_prediction
+Model 1,XGBoost,2009,14353.3228,train_prediction
+Model 1,XGBoost,2010,13016.0575,train_prediction
+Model 1,XGBoost,2011,13959.6281,train_prediction
+Model 1,XGBoost,2012,15226.3055,train_prediction
+Model 1,XGBoost,2013,15265.9854,train_prediction
+Model 1,XGBoost,2014,15432.7732,train_prediction
+Model 1,XGBoost,2015,15505.5549,train_prediction
+Model 1,XGBoost,2016,14068.0188,train_prediction
+Model 1,XGBoost,2017,14014.5876,train_prediction
+Model 1,XGBoost,2018,15243.9488,train_prediction
+Model 1,XGBoost,2019,16402.3935,test_prediction
+Model 1,XGBoost,2020,16298.3479,test_prediction
+Model 1,XGBoost,2021,15142.5453,test_prediction
+Model 1,XGBoost,2022,17228.2102,test_prediction
+Model 1,XGBoost,2023,18376.8171,test_prediction
+Model 2,Actual,2000,7145.4809,train_actual
+Model 2,Actual,2001,7014.7569,train_actual
+Model 2,Actual,2002,7216.1784,train_actual
+Model 2,Actual,2003,8244.8198,train_actual
+Model 2,Actual,2004,9622.9956,train_actual
+Model 2,Actual,2005,10502.969,train_actual
+Model 2,Actual,2006,11298.6274,train_actual
+Model 2,Actual,2007,12839.7884,train_actual
+Model 2,Actual,2008,13999.9457,train_actual
+Model 2,Actual,2009,12571.7681,train_actual
+Model 2,Actual,2010,13472.5618,train_actual
+Model 2,Actual,2011,15027.3425,train_actual
+Model 2,Actual,2012,15032.8104,train_actual
+Model 2,Actual,2013,15335.7847,train_actual
+Model 2,Actual,2014,15390.2246,train_actual
+Model 2,Actual,2015,13540.3736,train_actual
+Model 2,Actual,2016,13611.9756,train_actual
+Model 2,Actual,2017,14470.2808,train_actual
+Model 2,Actual,2018,15718.373,train_actual
+Model 2,Actual,2019,15698.9605,test_actual
+Model 2,Actual,2020,14549.3612,test_actual
+Model 2,Actual,2021,17155.0981,test_actual
+Model 2,Actual,2022,18048.6179,test_actual
+Model 2,Actual,2023,18914.0876,test_actual
+Model 2,Elastic Net,2000,7343.467,train_prediction
+Model 2,Elastic Net,2001,7351.9413,train_prediction
+Model 2,Elastic Net,2002,7041.8514,train_prediction
+Model 2,Elastic Net,2003,7315.6066,train_prediction
+Model 2,Elastic Net,2004,8620.0764,train_prediction
+Model 2,Elastic Net,2005,9825.5917,train_prediction
+Model 2,Elastic Net,2006,10625.4415,train_prediction
+Model 2,Elastic Net,2007,11517.5885,train_prediction
+Model 2,Elastic Net,2008,12921.5962,train_prediction
+Model 2,Elastic Net,2009,14599.2763,train_prediction
+Model 2,Elastic Net,2010,12861.3869,train_prediction
+Model 2,Elastic Net,2011,13738.0927,train_prediction
+Model 2,Elastic Net,2012,15437.1584,train_prediction
+Model 2,Elastic Net,2013,15306.9615,train_prediction
+Model 2,Elastic Net,2014,15700.5146,train_prediction
+Model 2,Elastic Net,2015,15767.5455,train_prediction
+Model 2,Elastic Net,2016,14049.4791,train_prediction
+Model 2,Elastic Net,2017,13964.2948,train_prediction
+Model 2,Elastic Net,2018,15103.8571,train_prediction
+Model 2,Elastic Net,2019,16343.5832,test_prediction
+Model 2,Elastic Net,2020,16130.0415,test_prediction
+Model 2,Elastic Net,2021,15159.8329,test_prediction
+Model 2,Elastic Net,2022,17729.2406,test_prediction
+Model 2,Elastic Net,2023,18541.8839,test_prediction
+Model 2,OLS,2000,7414.321,train_prediction
+Model 2,OLS,2001,7414.3971,train_prediction
+Model 2,OLS,2002,7091.578,train_prediction
+Model 2,OLS,2003,7356.6504,train_prediction
+Model 2,OLS,2004,8665.1244,train_prediction
+Model 2,OLS,2005,9876.283,train_prediction
+Model 2,OLS,2006,10680.103,train_prediction
+Model 2,OLS,2007,11574.9507,train_prediction
+Model 2,OLS,2008,12983.2083,train_prediction
+Model 2,OLS,2009,14678.7902,train_prediction
+Model 2,OLS,2010,12895.2612,train_prediction
+Model 2,OLS,2011,13772.5985,train_prediction
+Model 2,OLS,2012,15485.4768,train_prediction
+Model 2,OLS,2013,15343.7257,train_prediction
+Model 2,OLS,2014,15726.4343,train_prediction
+Model 2,OLS,2015,15785.0412,train_prediction
+Model 2,OLS,2016,14045.0689,train_prediction
+Model 2,OLS,2017,13952.0313,train_prediction
+Model 2,OLS,2018,15090.8171,train_prediction
+Model 2,OLS,2019,16329.0628,test_prediction
+Model 2,OLS,2020,16105.7865,test_prediction
+Model 2,OLS,2021,15118.2322,test_prediction
+Model 2,OLS,2022,17697.4927,test_prediction
+Model 2,OLS,2023,18533.8613,test_prediction
+Model 2,Random Forest,2000,7217.37,train_prediction
+Model 2,Random Forest,2001,7217.6004,train_prediction
+Model 2,Random Forest,2002,7175.0597,train_prediction
+Model 2,Random Forest,2003,7850.1898,train_prediction
+Model 2,Random Forest,2004,9223.1661,train_prediction
+Model 2,Random Forest,2005,10306.089,train_prediction
+Model 2,Random Forest,2006,11114.1605,train_prediction
+Model 2,Random Forest,2007,12333.0006,train_prediction
+Model 2,Random Forest,2008,13500.23,train_prediction
+Model 2,Random Forest,2009,13456.5234,train_prediction
+Model 2,Random Forest,2010,13325.055,train_prediction
+Model 2,Random Forest,2011,14402.5787,train_prediction
+Model 2,Random Forest,2012,15046.1336,train_prediction
+Model 2,Random Forest,2013,15218.2519,train_prediction
+Model 2,Random Forest,2014,15250.7007,train_prediction
+Model 2,Random Forest,2015,14457.2282,train_prediction
+Model 2,Random Forest,2016,13901.241,train_prediction
+Model 2,Random Forest,2017,14197.4327,train_prediction
+Model 2,Random Forest,2018,15428.365,train_prediction
+Model 2,Random Forest,2019,16293.8167,test_prediction
+Model 2,Random Forest,2020,16152.4405,test_prediction
+Model 2,Random Forest,2021,15080.3584,test_prediction
+Model 2,Random Forest,2022,17062.225,test_prediction
+Model 2,Random Forest,2023,17719.3654,test_prediction
+Model 2,Ridge,2000,7355.9961,train_prediction
+Model 2,Ridge,2001,7365.244,train_prediction
+Model 2,Ridge,2002,7054.7958,train_prediction
+Model 2,Ridge,2003,7325.1534,train_prediction
+Model 2,Ridge,2004,8624.2958,train_prediction
+Model 2,Ridge,2005,9827.7591,train_prediction
+Model 2,Ridge,2006,10625.4369,train_prediction
+Model 2,Ridge,2007,11515.9577,train_prediction
+Model 2,Ridge,2008,12912.9194,train_prediction
+Model 2,Ridge,2009,14594.6346,train_prediction
+Model 2,Ridge,2010,12854.7154,train_prediction
+Model 2,Ridge,2011,13730.9509,train_prediction
+Model 2,Ridge,2012,15430.5579,train_prediction
+Model 2,Ridge,2013,15299.1728,train_prediction
+Model 2,Ridge,2014,15691.2984,train_prediction
+Model 2,Ridge,2015,15760.5763,train_prediction
+Model 2,Ridge,2016,14048.362,train_prediction
+Model 2,Ridge,2017,13965.5081,train_prediction
+Model 2,Ridge,2018,15102.2507,train_prediction
+Model 2,Ridge,2019,16338.1751,test_prediction
+Model 2,Ridge,2020,16126.2069,test_prediction
+Model 2,Ridge,2021,15143.8522,test_prediction
+Model 2,Ridge,2022,17697.0653,test_prediction
+Model 2,Ridge,2023,18534.9312,test_prediction
+Model 2,XGBoost,2000,7315.4487,train_prediction
+Model 2,XGBoost,2001,7417.5887,train_prediction
+Model 2,XGBoost,2002,7157.4309,train_prediction
+Model 2,XGBoost,2003,7569.0505,train_prediction
+Model 2,XGBoost,2004,8964.9543,train_prediction
+Model 2,XGBoost,2005,10211.6245,train_prediction
+Model 2,XGBoost,2006,10954.9159,train_prediction
+Model 2,XGBoost,2007,11883.6314,train_prediction
+Model 2,XGBoost,2008,13081.6862,train_prediction
+Model 2,XGBoost,2009,13863.0368,train_prediction
+Model 2,XGBoost,2010,13006.149,train_prediction
+Model 2,XGBoost,2011,13880.6159,train_prediction
+Model 2,XGBoost,2012,14938.0467,train_prediction
+Model 2,XGBoost,2013,15101.0125,train_prediction
+Model 2,XGBoost,2014,15335.1538,train_prediction
+Model 2,XGBoost,2015,15081.0413,train_prediction
+Model 2,XGBoost,2016,14042.5701,train_prediction
+Model 2,XGBoost,2017,14177.8646,train_prediction
+Model 2,XGBoost,2018,15509.7301,train_prediction
+Model 2,XGBoost,2019,16766.136,test_prediction
+Model 2,XGBoost,2020,16552.4605,test_prediction
+Model 2,XGBoost,2021,15422.7333,test_prediction
+Model 2,XGBoost,2022,17538.5251,test_prediction
+Model 2,XGBoost,2023,18263.2532,test_prediction
+Model 3,Actual,2000,7145.4809,train_actual
+Model 3,Actual,2001,7014.7569,train_actual
+Model 3,Actual,2002,7216.1784,train_actual
+Model 3,Actual,2003,8244.8198,train_actual
+Model 3,Actual,2004,9622.9956,train_actual
+Model 3,Actual,2005,10502.969,train_actual
+Model 3,Actual,2006,11298.6274,train_actual
+Model 3,Actual,2007,12839.7884,train_actual
+Model 3,Actual,2008,13999.9457,train_actual
+Model 3,Actual,2009,12571.7681,train_actual
+Model 3,Actual,2010,13472.5618,train_actual
+Model 3,Actual,2011,15027.3425,train_actual
+Model 3,Actual,2012,15032.8104,train_actual
+Model 3,Actual,2013,15335.7847,train_actual
+Model 3,Actual,2014,15390.2246,train_actual
+Model 3,Actual,2015,13540.3736,train_actual
+Model 3,Actual,2016,13611.9756,train_actual
+Model 3,Actual,2017,14470.2808,train_actual
+Model 3,Actual,2018,15718.373,train_actual
+Model 3,Actual,2019,15698.9605,test_actual
+Model 3,Actual,2020,14549.3612,test_actual
+Model 3,Actual,2021,17155.0981,test_actual
+Model 3,Actual,2022,18048.6179,test_actual
+Model 3,Actual,2023,18914.0876,test_actual
+Model 3,Elastic Net,2000,7429.6617,train_prediction
+Model 3,Elastic Net,2001,7433.092,train_prediction
+Model 3,Elastic Net,2002,7114.5502,train_prediction
+Model 3,Elastic Net,2003,7386.2701,train_prediction
+Model 3,Elastic Net,2004,8697.8336,train_prediction
+Model 3,Elastic Net,2005,9907.6172,train_prediction
+Model 3,Elastic Net,2006,10707.161,train_prediction
+Model 3,Elastic Net,2007,11598.5,train_prediction
+Model 3,Elastic Net,2008,13003.9621,train_prediction
+Model 3,Elastic Net,2009,14298.495,train_prediction
+Model 3,Elastic Net,2010,12586.9935,train_prediction
+Model 3,Elastic Net,2011,13796.9108,train_prediction
+Model 3,Elastic Net,2012,15493.0005,train_prediction
+Model 3,Elastic Net,2013,15351.8784,train_prediction
+Model 3,Elastic Net,2014,15735.6671,train_prediction
+Model 3,Elastic Net,2015,15791.7189,train_prediction
+Model 3,Elastic Net,2016,14060.8902,train_prediction
+Model 3,Elastic Net,2017,13965.7593,train_prediction
+Model 3,Elastic Net,2018,15095.5057,train_prediction
+Model 3,Elastic Net,2019,16323.7066,test_prediction
+Model 3,Elastic Net,2020,16099.2676,test_prediction
+Model 3,Elastic Net,2021,15121.7619,test_prediction
+Model 3,Elastic Net,2022,17674.79,test_prediction
+Model 3,Elastic Net,2023,18471.7069,test_prediction
+Model 3,OLS,2000,7557.7171,train_prediction
+Model 3,OLS,2001,7544.7104,train_prediction
+Model 3,OLS,2002,7207.1242,train_prediction
+Model 3,OLS,2003,7470.3066,train_prediction
+Model 3,OLS,2004,8792.1798,train_prediction
+Model 3,OLS,2005,10009.4559,train_prediction
+Model 3,OLS,2006,10810.3631,train_prediction
+Model 3,OLS,2007,11704.5356,train_prediction
+Model 3,OLS,2008,13118.462,train_prediction
+Model 3,OLS,2009,14174.369,train_prediction
+Model 3,OLS,2010,12436.371,train_prediction
+Model 3,OLS,2011,13851.8341,train_prediction
+Model 3,OLS,2012,15554.8334,train_prediction
+Model 3,OLS,2013,15393.1472,train_prediction
+Model 3,OLS,2014,15761.6133,train_prediction
+Model 3,OLS,2015,15804.2015,train_prediction
+Model 3,OLS,2016,14048.4016,train_prediction
+Model 3,OLS,2017,13940.3343,train_prediction
+Model 3,OLS,2018,15066.0281,train_prediction
+Model 3,OLS,2019,16288.2888,test_prediction
+Model 3,OLS,2020,16049.5349,test_prediction
+Model 3,OLS,2021,15069.2342,test_prediction
+Model 3,OLS,2022,17634.9957,test_prediction
+Model 3,OLS,2023,18432.0753,test_prediction
+Model 3,Random Forest,2000,7180.2029,train_prediction
+Model 3,Random Forest,2001,7192.7094,train_prediction
+Model 3,Random Forest,2002,7189.9813,train_prediction
+Model 3,Random Forest,2003,7931.8528,train_prediction
+Model 3,Random Forest,2004,9306.5536,train_prediction
+Model 3,Random Forest,2005,10399.8049,train_prediction
+Model 3,Random Forest,2006,11216.4555,train_prediction
+Model 3,Random Forest,2007,12447.7465,train_prediction
+Model 3,Random Forest,2008,13672.0472,train_prediction
+Model 3,Random Forest,2009,13336.281,train_prediction
+Model 3,Random Forest,2010,13235.6904,train_prediction
+Model 3,Random Forest,2011,14475.8706,train_prediction
+Model 3,Random Forest,2012,15078.1551,train_prediction
+Model 3,Random Forest,2013,15231.6697,train_prediction
+Model 3,Random Forest,2014,15237.2839,train_prediction
+Model 3,Random Forest,2015,14317.623,train_prediction
+Model 3,Random Forest,2016,13820.4204,train_prediction
+Model 3,Random Forest,2017,14186.1261,train_prediction
+Model 3,Random Forest,2018,15397.7975,train_prediction
+Model 3,Random Forest,2019,16232.4714,test_prediction
+Model 3,Random Forest,2020,16110.9581,test_prediction
+Model 3,Random Forest,2021,15034.9605,test_prediction
+Model 3,Random Forest,2022,17065.8681,test_prediction
+Model 3,Random Forest,2023,17765.9215,test_prediction
+Model 3,Ridge,2000,7557.7166,train_prediction
+Model 3,Ridge,2001,7544.7101,train_prediction
+Model 3,Ridge,2002,7207.124,train_prediction
+Model 3,Ridge,2003,7470.3064,train_prediction
+Model 3,Ridge,2004,8792.1795,train_prediction
+Model 3,Ridge,2005,10009.4556,train_prediction
+Model 3,Ridge,2006,10810.3627,train_prediction
+Model 3,Ridge,2007,11704.5351,train_prediction
+Model 3,Ridge,2008,13118.4614,train_prediction
+Model 3,Ridge,2009,14174.3685,train_prediction
+Model 3,Ridge,2010,12436.371,train_prediction
+Model 3,Ridge,2011,13851.8337,train_prediction
+Model 3,Ridge,2012,15554.8328,train_prediction
+Model 3,Ridge,2013,15393.1467,train_prediction
+Model 3,Ridge,2014,15761.6128,train_prediction
+Model 3,Ridge,2015,15804.2012,train_prediction
+Model 3,Ridge,2016,14048.4015,train_prediction
+Model 3,Ridge,2017,13940.3343,train_prediction
+Model 3,Ridge,2018,15066.028,train_prediction
+Model 3,Ridge,2019,16288.2886,test_prediction
+Model 3,Ridge,2020,16049.5348,test_prediction
+Model 3,Ridge,2021,15069.2341,test_prediction
+Model 3,Ridge,2022,17634.9951,test_prediction
+Model 3,Ridge,2023,18432.0746,test_prediction
+Model 3,XGBoost,2000,7097.3792,train_prediction
+Model 3,XGBoost,2001,7278.9816,train_prediction
+Model 3,XGBoost,2002,7101.2688,train_prediction
+Model 3,XGBoost,2003,7730.3168,train_prediction
+Model 3,XGBoost,2004,9048.6967,train_prediction
+Model 3,XGBoost,2005,10302.7007,train_prediction
+Model 3,XGBoost,2006,11084.7646,train_prediction
+Model 3,XGBoost,2007,12092.1424,train_prediction
+Model 3,XGBoost,2008,13390.2296,train_prediction
+Model 3,XGBoost,2009,13138.553,train_prediction
+Model 3,XGBoost,2010,12932.6013,train_prediction
+Model 3,XGBoost,2011,13836.7875,train_prediction
+Model 3,XGBoost,2012,14773.047,train_prediction
+Model 3,XGBoost,2013,14878.1146,train_prediction
+Model 3,XGBoost,2014,15048.3126,train_prediction
+Model 3,XGBoost,2015,14280.4089,train_prediction
+Model 3,XGBoost,2016,13531.675,train_prediction
+Model 3,XGBoost,2017,14003.5067,train_prediction
+Model 3,XGBoost,2018,15168.4952,train_prediction
+Model 3,XGBoost,2019,16351.3577,test_prediction
+Model 3,XGBoost,2020,16175.9726,test_prediction
+Model 3,XGBoost,2021,15110.8899,test_prediction
+Model 3,XGBoost,2022,17148.0623,test_prediction
+Model 3,XGBoost,2023,18052.2235,test_prediction

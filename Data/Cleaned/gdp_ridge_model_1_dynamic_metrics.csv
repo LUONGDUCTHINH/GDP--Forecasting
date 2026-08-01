@@ -1,0 +1,5 @@
+model,model_family,split,scale,n_obs,alpha,MAE,RMSE,MAPE_pct,R_squared
+Ridge Model 1 - Baseline Dynamic,Regularized Linear ML,train,level_gdp_usd,10117,0.0001,673.5648,1913.8342,14.168,0.9872
+Ridge Model 1 - Baseline Dynamic,Regularized Linear ML,train,log_gdp,10117,0.0001,0.0949,0.1607,1.3505,0.9915
+Ridge Model 1 - Baseline Dynamic,Regularized Linear ML,test,level_gdp_usd,1042,0.0001,1703.8717,3976.4164,9.3056,0.9821
+Ridge Model 1 - Baseline Dynamic,Regularized Linear ML,test,log_gdp,1042,0.0001,0.0898,0.1269,1.0325,0.9925

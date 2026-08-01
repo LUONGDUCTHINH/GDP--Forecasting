@@ -1,0 +1,17 @@
+feature,importance
+log_gdp_per_capita,0.8096177248507169
+life_expectancy_years,0.1566581819579058
+internet_users_pct_clean,0.024314524628734048
+wb_region_Sub_Saharan_Africa_,0.0030175237564032107
+unemployment_pct_clean,0.002193506176835691
+log_population_total,0.001338534150115038
+year_trend,0.0011595243781833187
+inflation_pct_clean,0.0009825500653643268
+wb_region_Europe_and_Central_Asia,0.0002561987689684477
+wb_region_Latin_America_and_Caribbean_,0.00017653880807365485
+asian_financial_crisis_9798,9.800116200008542e-05
+global_financial_crisis_0809,7.598413384150604e-05
+wb_region_Middle_East_North_Africa_Afghanistan_and_Pakistan,5.743494585891973e-05
+wb_region_East_Asia_and_Pacific,4.287102545600045e-05
+wb_region_South_Asia,9.030899075196257e-06
+wb_region_North_America,1.8702924678073452e-06

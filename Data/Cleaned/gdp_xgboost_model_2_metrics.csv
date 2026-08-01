@@ -1,0 +1,5 @@
+model,model_family,model_note,split,scale,n_obs,MAE,RMSE,MAPE_pct,R_squared
+XGBoost Model 2 - Extended Dynamic,Gradient Boosting ML,"XGBoost version of Model 2 with lag GDP, population, life expectancy, inflation, unemployment, and internet.",train,level_gdp_usd,3909,835.3499,1753.9447,8.1265,0.9897
+XGBoost Model 2 - Extended Dynamic,Gradient Boosting ML,"XGBoost version of Model 2 with lag GDP, population, life expectancy, inflation, unemployment, and internet.",train,log_gdp,3909,0.0805,0.1115,1.0148,0.9949
+XGBoost Model 2 - Extended Dynamic,Gradient Boosting ML,"XGBoost version of Model 2 with lag GDP, population, life expectancy, inflation, unemployment, and internet.",test,level_gdp_usd,813,1858.3526,4168.2013,12.3253,0.9663
+XGBoost Model 2 - Extended Dynamic,Gradient Boosting ML,"XGBoost version of Model 2 with lag GDP, population, life expectancy, inflation, unemployment, and internet.",test,log_gdp,813,0.1162,0.1559,1.3562,0.9879

@@ -1,0 +1,5 @@
+model,model_family,model_note,split,scale,n_obs,MAE,RMSE,MAPE_pct,R_squared
+XGBoost Model 3 - Full Dynamic,Gradient Boosting ML,"XGBoost version of Model 3 with lag GDP, extra drivers, crisis dummies, region effects, and year trend.",train,level_gdp_usd,3909,842.1185,1954.937,7.9706,0.9871
+XGBoost Model 3 - Full Dynamic,Gradient Boosting ML,"XGBoost version of Model 3 with lag GDP, extra drivers, crisis dummies, region effects, and year trend.",train,log_gdp,3909,0.0791,0.1122,1.0093,0.9948
+XGBoost Model 3 - Full Dynamic,Gradient Boosting ML,"XGBoost version of Model 3 with lag GDP, extra drivers, crisis dummies, region effects, and year trend.",test,level_gdp_usd,813,1786.7812,4331.0483,10.5643,0.9636
+XGBoost Model 3 - Full Dynamic,Gradient Boosting ML,"XGBoost version of Model 3 with lag GDP, extra drivers, crisis dummies, region effects, and year trend.",test,log_gdp,813,0.1021,0.1401,1.1791,0.9902

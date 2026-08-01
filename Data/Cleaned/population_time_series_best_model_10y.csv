@@ -1,0 +1,2 @@
+Dataset,Model,MAE,RMSE,MAPE_pct,R_squared,n_predictions,n_countries_modeled
+Population,LogHolt,70265.27081006327,316547.7427432141,0.5801231189151959,0.9999919749994245,11905,217

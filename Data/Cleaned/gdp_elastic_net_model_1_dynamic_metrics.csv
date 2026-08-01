@@ -1,0 +1,5 @@
+model,model_family,split,scale,n_obs,alpha,l1_ratio,MAE,RMSE,MAPE_pct,R_squared
+Elastic Net Model 1 - Baseline Dynamic,Regularized Linear ML,train,level_gdp_usd,10117,0.0005,0.9,673.4762,1913.0514,14.1702,0.9872
+Elastic Net Model 1 - Baseline Dynamic,Regularized Linear ML,train,log_gdp,10117,0.0005,0.9,0.0949,0.1607,1.3504,0.9915
+Elastic Net Model 1 - Baseline Dynamic,Regularized Linear ML,test,level_gdp_usd,1042,0.0005,0.9,1702.1639,3977.374,9.3014,0.9821
+Elastic Net Model 1 - Baseline Dynamic,Regularized Linear ML,test,log_gdp,1042,0.0005,0.9,0.0898,0.1269,1.0323,0.9925

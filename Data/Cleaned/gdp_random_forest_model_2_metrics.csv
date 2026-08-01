@@ -1,0 +1,5 @@
+model,model_family,model_note,split,scale,n_obs,MAE,RMSE,MAPE_pct,R_squared
+Random Forest Model 2 - Extended Dynamic,Tree-based ML,"Random Forest version of Model 2 with lag GDP, population, life expectancy, inflation, unemployment, and internet.",train,level_gdp_usd,3909,446.9555,1025.5247,4.3627,0.9965
+Random Forest Model 2 - Extended Dynamic,Tree-based ML,"Random Forest version of Model 2 with lag GDP, population, life expectancy, inflation, unemployment, and internet.",train,log_gdp,3909,0.0433,0.0675,0.5507,0.9981
+Random Forest Model 2 - Extended Dynamic,Tree-based ML,"Random Forest version of Model 2 with lag GDP, population, life expectancy, inflation, unemployment, and internet.",test,level_gdp_usd,813,1687.3212,4027.8137,9.8958,0.9685
+Random Forest Model 2 - Extended Dynamic,Tree-based ML,"Random Forest version of Model 2 with lag GDP, population, life expectancy, inflation, unemployment, and internet.",test,log_gdp,813,0.097,0.1319,1.1139,0.9913

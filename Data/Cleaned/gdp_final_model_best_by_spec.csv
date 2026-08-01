@@ -1,0 +1,4 @@
+spec,algorithm,n_obs,MAE,RMSE,MAPE_pct,R_squared,spec_number,rank_mae,rank_rmse,rank_mape,rank_r2,rank_score
+Model 1,OLS,813,1498.1181,3477.1503,9.1617,0.9766,1,6.0,5.0,6.0,2.0,19.0
+Model 2,Elastic Net,813,1486.9078,3468.6213,9.1557,0.9767,2,3.0,1.0,5.0,1.0,10.0
+Model 3,OLS,813,1468.1942,3472.995,8.8964,0.9766,3,1.0,2.0,1.0,2.0,6.0

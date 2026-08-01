@@ -1,0 +1,8 @@
+model,wb_region,n_obs,MAE,RMSE,MAPE_pct,R_squared
+XGBoost Model 3 - Full Dynamic,Sub-Saharan Africa ,204,233.8746,455.5883,8.7988,0.9609
+XGBoost Model 3 - Full Dynamic,South Asia,30,633.0117,1435.9337,12.3833,0.8015
+XGBoost Model 3 - Full Dynamic,Latin America & Caribbean ,127,1093.6218,1766.5647,10.1838,0.936
+XGBoost Model 3 - Full Dynamic,"Middle East, North Africa, Afghanistan & Pakistan",102,2336.7858,4297.1299,15.0459,0.9548
+XGBoost Model 3 - Full Dynamic,Europe & Central Asia,229,2791.3802,5482.3634,8.4328,0.9631
+XGBoost Model 3 - Full Dynamic,East Asia & Pacific,111,2218.5489,5837.3072,9.795,0.9371
+XGBoost Model 3 - Full Dynamic,North America,10,6592.7036,8294.5006,10.114,0.5104

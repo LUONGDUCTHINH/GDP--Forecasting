@@ -1,0 +1,5 @@
+model,model_family,model_note,split,scale,n_obs,MAE,RMSE,MAPE_pct,R_squared
+Random Forest Model 1 - Baseline Dynamic,Tree-based ML,"Random Forest version of Model 1 using lag GDP, population, and life expectancy.",train,level_gdp_usd,10117,393.4371,1096.1558,6.5308,0.9958
+Random Forest Model 1 - Baseline Dynamic,Tree-based ML,"Random Forest version of Model 1 using lag GDP, population, and life expectancy.",train,log_gdp,10117,0.0584,0.1022,0.8337,0.9966
+Random Forest Model 1 - Baseline Dynamic,Tree-based ML,"Random Forest version of Model 1 using lag GDP, population, and life expectancy.",test,level_gdp_usd,1042,1942.1704,5420.2788,10.0114,0.9668
+Random Forest Model 1 - Baseline Dynamic,Tree-based ML,"Random Forest version of Model 1 using lag GDP, population, and life expectancy.",test,log_gdp,1042,0.0968,0.1356,1.1086,0.9914

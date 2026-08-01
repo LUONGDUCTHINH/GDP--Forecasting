@@ -1,0 +1,22 @@
+model,model_family,wb_region,n_obs,MAE,RMSE,MAPE_pct,R_squared
+Model 1 - Baseline,Pooled OLS forecast model,Sub-Saharan Africa ,204,1466.2035,2131.7561,87.2273,0.1446
+Model 1 - Baseline,Pooled OLS forecast model,South Asia,30,4444.8738,5610.9333,120.8918,-2.0316
+Model 1 - Baseline,Pooled OLS forecast model,Latin America & Caribbean ,127,4047.3143,6571.0535,42.631,0.115
+Model 1 - Baseline,Pooled OLS forecast model,"Middle East, North Africa, Afghanistan & Pakistan",102,9001.5676,15009.4666,76.5517,0.4483
+Model 1 - Baseline,Pooled OLS forecast model,East Asia & Pacific,111,9012.5604,15725.7517,47.5041,0.5433
+Model 1 - Baseline,Pooled OLS forecast model,Europe & Central Asia,229,16843.4742,26764.7348,53.8482,0.1206
+Model 1 - Baseline,Pooled OLS forecast model,North America,10,45789.8975,48848.544,72.4893,-15.9804
+Model 2 - Extended,Pooled OLS forecast model,Sub-Saharan Africa ,204,1628.8472,3070.8651,101.0891,-0.775
+Model 2 - Extended,Pooled OLS forecast model,Latin America & Caribbean ,127,6658.8388,8480.9034,87.2112,-0.4742
+Model 2 - Extended,Pooled OLS forecast model,East Asia & Pacific,111,7681.2377,10499.3285,81.3265,0.7964
+Model 2 - Extended,Pooled OLS forecast model,South Asia,30,8947.8514,12481.6433,212.3105,-14.0017
+Model 2 - Extended,Pooled OLS forecast model,"Middle East, North Africa, Afghanistan & Pakistan",102,11227.2919,14031.3675,175.1968,0.5178
+Model 2 - Extended,Pooled OLS forecast model,Europe & Central Asia,229,11834.0725,16288.722,91.5634,0.6743
+Model 2 - Extended,Pooled OLS forecast model,North America,10,27052.578,34516.6231,39.2974,-7.4781
+Model 3 - Full Forecasting,Pooled OLS forecast model,South Asia,30,1468.832,2195.8102,35.7012,0.5357
+Model 3 - Full Forecasting,Pooled OLS forecast model,Sub-Saharan Africa ,204,1513.1774,3280.1114,74.5709,-1.0252
+Model 3 - Full Forecasting,Pooled OLS forecast model,Latin America & Caribbean ,127,4049.692,5949.204,41.5913,0.2746
+Model 3 - Full Forecasting,Pooled OLS forecast model,East Asia & Pacific,111,5842.7797,10286.2723,35.0717,0.8046
+Model 3 - Full Forecasting,Pooled OLS forecast model,"Middle East, North Africa, Afghanistan & Pakistan",102,7646.2493,10939.1078,89.861,0.7069
+Model 3 - Full Forecasting,Pooled OLS forecast model,Europe & Central Asia,229,11051.7792,17372.0047,58.9373,0.6295
+Model 3 - Full Forecasting,Pooled OLS forecast model,North America,10,27266.6403,30819.6895,44.1924,-5.7593

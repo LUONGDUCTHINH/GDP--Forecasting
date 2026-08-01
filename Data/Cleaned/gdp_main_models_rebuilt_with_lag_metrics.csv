@@ -1,0 +1,13 @@
+model,model_family,model_note,split,scale,n_obs,MAE,RMSE,MAPE_pct,R_squared
+Model 1 - Baseline Dynamic,Dynamic pooled OLS,Adds lag GDP to the baseline specification.,train,level_gdp_usd,3909,930.8785,2174.5134,8.981,0.9841
+Model 1 - Baseline Dynamic,Dynamic pooled OLS,Adds lag GDP to the baseline specification.,train,log_gdp,3909,0.0882,0.1305,1.1191,0.993
+Model 1 - Baseline Dynamic,Dynamic pooled OLS,Adds lag GDP to the baseline specification.,test,level_gdp_usd,813,1498.1181,3477.1503,9.1617,0.9766
+Model 1 - Baseline Dynamic,Dynamic pooled OLS,Adds lag GDP to the baseline specification.,test,log_gdp,813,0.0892,0.1233,1.0266,0.9924
+Model 2 - Extended Dynamic,Dynamic pooled OLS,Adds macro and digital indicators on top of lag GDP.,train,level_gdp_usd,3909,935.9154,2172.8487,9.0013,0.9841
+Model 2 - Extended Dynamic,Dynamic pooled OLS,Adds macro and digital indicators on top of lag GDP.,train,log_gdp,3909,0.0883,0.1303,1.1199,0.993
+Model 2 - Extended Dynamic,Dynamic pooled OLS,Adds macro and digital indicators on top of lag GDP.,test,level_gdp_usd,813,1485.094,3482.8558,9.0518,0.9765
+Model 2 - Extended Dynamic,Dynamic pooled OLS,Adds macro and digital indicators on top of lag GDP.,test,log_gdp,813,0.0888,0.1232,1.0208,0.9924
+Model 3 - Full Dynamic,Dynamic pooled OLS,"Full predictive model with lag GDP, extra drivers, trainable event dummies, region effects, and a linear time trend.",train,level_gdp_usd,3909,913.8368,2110.8172,8.7943,0.985
+Model 3 - Full Dynamic,Dynamic pooled OLS,"Full predictive model with lag GDP, extra drivers, trainable event dummies, region effects, and a linear time trend.",train,log_gdp,3909,0.0864,0.1273,1.0952,0.9933
+Model 3 - Full Dynamic,Dynamic pooled OLS,"Full predictive model with lag GDP, extra drivers, trainable event dummies, region effects, and a linear time trend.",test,level_gdp_usd,813,1468.1942,3472.995,8.8964,0.9766
+Model 3 - Full Dynamic,Dynamic pooled OLS,"Full predictive model with lag GDP, extra drivers, trainable event dummies, region effects, and a linear time trend.",test,log_gdp,813,0.0878,0.122,1.0074,0.9926

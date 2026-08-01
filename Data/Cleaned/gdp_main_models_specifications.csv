@@ -1,0 +1,4 @@
+model,family,formula,note
+Model 1 - Baseline,Pooled OLS forecast model,target_log_gdp_next_year ~ log_population_total + life_expectancy_years,Uses population and life expectancy only.
+Model 2 - Extended,Pooled OLS forecast model,target_log_gdp_next_year ~ log_population_total + life_expectancy_years + inflation_pct_clean + unemployment_pct_clean + internet_users_pct_clean,"Adds inflation, unemployment, and internet usage."
+Model 3 - Full Forecasting,Pooled OLS forecast model,target_log_gdp_next_year ~ log_population_total + life_expectancy_years + inflation_pct_clean + unemployment_pct_clean + internet_users_pct_clean + asian_financial_crisis_9798 + global_financial_crisis_0809 + C(wb_region) + year_trend,Forecast-ready Model 3. Uses region effects and a linear year trend. Post-2017 global event dummies are excluded from the backtest because they do not appear in the training window.

@@ -1,0 +1,5 @@
+split,scale,model,n_obs,MAE,RMSE,MAPE_pct,R_squared
+train,level_gdp_usd,Model 3 - Full Dynamic,3909,913.8368,2110.8172,8.7943,0.985
+train,log_gdp,Model 3 - Full Dynamic,3909,0.0864,0.1273,1.0952,0.9933
+test,level_gdp_usd,Model 3 - Full Dynamic,813,1468.1942,3472.995,8.8964,0.9766
+test,log_gdp,Model 3 - Full Dynamic,813,0.0878,0.122,1.0074,0.9926

@@ -1,0 +1,5 @@
+split,scale,model,n_obs,MAE,RMSE,MAPE_pct,R_squared
+train,level_gdp_usd,Model 2 - Extended Pooled OLS,3909,5462.6648,10381.3327,70.565,0.6375
+train,log_gdp,Model 2 - Extended Pooled OLS,3909,0.6131,0.7834,7.7,0.7476
+test,level_gdp_usd,Model 2 - Extended Pooled OLS,813,7902.4876,12185.667,106.1816,0.712
+test,log_gdp,Model 2 - Extended Pooled OLS,813,0.6302,0.7924,7.7398,0.6864

@@ -1,0 +1,91 @@
+spec,algorithm,target_year,mean_gdp
+Model 1,Actual,2019,15698.9605
+Model 1,OLS,2019,16452.9427
+Model 1,Ridge,2019,16523.516
+Model 1,Elastic Net,2019,16516.1691
+Model 1,Random Forest,2019,16325.644
+Model 1,XGBoost,2019,16402.3935
+Model 1,Actual,2020,14549.3612
+Model 1,OLS,2020,16236.8379
+Model 1,Ridge,2020,16308.573
+Model 1,Elastic Net,2020,16301.2837
+Model 1,Random Forest,2020,16305.0968
+Model 1,XGBoost,2020,16298.3479
+Model 1,Actual,2021,17155.0981
+Model 1,OLS,2021,15254.6461
+Model 1,Ridge,2021,15315.8463
+Model 1,Elastic Net,2021,15309.5552
+Model 1,Random Forest,2021,15118.8032
+Model 1,XGBoost,2021,15142.5453
+Model 1,Actual,2022,18048.6179
+Model 1,OLS,2022,17847.2108
+Model 1,Ridge,2022,17910.6714
+Model 1,Elastic Net,2022,17903.4091
+Model 1,Random Forest,2022,17221.4441
+Model 1,XGBoost,2022,17228.2102
+Model 1,Actual,2023,18914.0876
+Model 1,OLS,2023,18667.7446
+Model 1,Ridge,2023,18739.1544
+Model 1,Elastic Net,2023,18731.2406
+Model 1,Random Forest,2023,18171.5003
+Model 1,XGBoost,2023,18376.8171
+Model 2,Actual,2019,15698.9605
+Model 2,OLS,2019,16329.0628
+Model 2,Ridge,2019,16338.1751
+Model 2,Elastic Net,2019,16343.5832
+Model 2,Random Forest,2019,16293.8167
+Model 2,XGBoost,2019,16766.136
+Model 2,Actual,2020,14549.3612
+Model 2,OLS,2020,16105.7865
+Model 2,Ridge,2020,16126.2069
+Model 2,Elastic Net,2020,16130.0415
+Model 2,Random Forest,2020,16152.4405
+Model 2,XGBoost,2020,16552.4605
+Model 2,Actual,2021,17155.0981
+Model 2,OLS,2021,15118.2322
+Model 2,Ridge,2021,15143.8522
+Model 2,Elastic Net,2021,15159.8329
+Model 2,Random Forest,2021,15080.3584
+Model 2,XGBoost,2021,15422.7333
+Model 2,Actual,2022,18048.6179
+Model 2,OLS,2022,17697.4927
+Model 2,Ridge,2022,17697.0653
+Model 2,Elastic Net,2022,17729.2406
+Model 2,Random Forest,2022,17062.225
+Model 2,XGBoost,2022,17538.5251
+Model 2,Actual,2023,18914.0876
+Model 2,OLS,2023,18533.8613
+Model 2,Ridge,2023,18534.9312
+Model 2,Elastic Net,2023,18541.8839
+Model 2,Random Forest,2023,17719.3654
+Model 2,XGBoost,2023,18263.2532
+Model 3,Actual,2019,15698.9605
+Model 3,OLS,2019,16288.2888
+Model 3,Ridge,2019,16288.2886
+Model 3,Elastic Net,2019,16323.7066
+Model 3,Random Forest,2019,16232.4714
+Model 3,XGBoost,2019,16351.3577
+Model 3,Actual,2020,14549.3612
+Model 3,OLS,2020,16049.5349
+Model 3,Ridge,2020,16049.5348
+Model 3,Elastic Net,2020,16099.2676
+Model 3,Random Forest,2020,16110.9581
+Model 3,XGBoost,2020,16175.9726
+Model 3,Actual,2021,17155.0981
+Model 3,OLS,2021,15069.2342
+Model 3,Ridge,2021,15069.2341
+Model 3,Elastic Net,2021,15121.7619
+Model 3,Random Forest,2021,15034.9605
+Model 3,XGBoost,2021,15110.8899
+Model 3,Actual,2022,18048.6179
+Model 3,OLS,2022,17634.9957
+Model 3,Ridge,2022,17634.9951
+Model 3,Elastic Net,2022,17674.79
+Model 3,Random Forest,2022,17065.8681
+Model 3,XGBoost,2022,17148.0623
+Model 3,Actual,2023,18914.0876
+Model 3,OLS,2023,18432.0753
+Model 3,Ridge,2023,18432.0746
+Model 3,Elastic Net,2023,18471.7069
+Model 3,Random Forest,2023,17765.9215
+Model 3,XGBoost,2023,18052.2235

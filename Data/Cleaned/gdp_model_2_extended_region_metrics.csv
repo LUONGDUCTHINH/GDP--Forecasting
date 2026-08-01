@@ -1,0 +1,8 @@
+wb_region,n_obs,MAE,RMSE,MAPE_pct,R_squared
+Sub-Saharan Africa ,204,1628.8472,3070.8651,101.0891,-0.775
+Latin America & Caribbean ,127,6658.8388,8480.9034,87.2112,-0.4742
+East Asia & Pacific,111,7681.2377,10499.3285,81.3265,0.7964
+South Asia,30,8947.8514,12481.6433,212.3105,-14.0017
+"Middle East, North Africa, Afghanistan & Pakistan",102,11227.292,14031.3675,175.1968,0.5178
+Europe & Central Asia,229,11834.0725,16288.722,91.5634,0.6743
+North America,10,27052.578,34516.6231,39.2974,-7.4781

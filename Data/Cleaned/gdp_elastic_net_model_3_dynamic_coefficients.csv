@@ -1,0 +1,17 @@
+term,coefficient,abs_coefficient
+log_gdp_per_capita,1.532064,1.532064
+life_expectancy_years,0.019543,0.019543
+asian_financial_crisis_9798,-0.018828,0.018828
+global_financial_crisis_0809,-0.007469,0.007469
+year_trend,-0.004664,0.004664
+log_population_total,-0.0,0.0
+inflation_pct_clean,0.0,0.0
+unemployment_pct_clean,0.0,0.0
+internet_users_pct_clean,-0.0,0.0
+wb_region_East Asia & Pacific,0.0,0.0
+wb_region_Europe & Central Asia,0.0,0.0
+wb_region_Latin America & Caribbean ,-0.0,0.0
+"wb_region_Middle East, North Africa, Afghanistan & Pakistan",-0.0,0.0
+wb_region_North America,0.0,0.0
+wb_region_South Asia,-0.0,0.0
+wb_region_Sub-Saharan Africa ,-0.0,0.0

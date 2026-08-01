@@ -1,0 +1,5 @@
+split,scale,model,n_obs,MAE,RMSE,MAPE_pct,R_squared
+train,level_gdp_usd,Model 1 - Baseline Pooled OLS,10117,5260.2406,13338.514,97.708,0.3779
+train,log_gdp,Model 1 - Baseline Pooled OLS,10117,0.738,0.923,10.2732,0.7195
+test,level_gdp_usd,Model 1 - Baseline Pooled OLS,1042,12277.6584,25904.9196,60.9438,0.2423
+test,log_gdp,Model 1 - Baseline Pooled OLS,1042,0.6899,0.8424,7.7022,0.6699

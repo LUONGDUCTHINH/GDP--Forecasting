@@ -1,0 +1,5 @@
+model,model_family,model_note,split,scale,n_obs,MAE,RMSE,MAPE_pct,R_squared
+XGBoost Model 1 - Baseline Dynamic,Gradient Boosting ML,"XGBoost version of Model 1 using lag GDP, population, and life expectancy.",train,level_gdp_usd,10117,666.6269,1910.2871,10.2075,0.9872
+XGBoost Model 1 - Baseline Dynamic,Gradient Boosting ML,"XGBoost version of Model 1 using lag GDP, population, and life expectancy.",train,log_gdp,10117,0.0922,0.146,1.3062,0.993
+XGBoost Model 1 - Baseline Dynamic,Gradient Boosting ML,"XGBoost version of Model 1 using lag GDP, population, and life expectancy.",test,level_gdp_usd,1042,2088.0187,5968.9899,10.2253,0.9598
+XGBoost Model 1 - Baseline Dynamic,Gradient Boosting ML,"XGBoost version of Model 1 using lag GDP, population, and life expectancy.",test,log_gdp,1042,0.0991,0.139,1.1325,0.991

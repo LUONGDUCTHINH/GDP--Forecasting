@@ -1,0 +1,4 @@
+model,family,formula,note
+Model 1 - Baseline Dynamic,Dynamic pooled OLS,target_log_gdp_next_year ~ log_gdp_per_capita + log_population_total + life_expectancy_years,Adds lag GDP to the baseline specification.
+Model 2 - Extended Dynamic,Dynamic pooled OLS,target_log_gdp_next_year ~ log_gdp_per_capita + log_population_total + life_expectancy_years + inflation_pct_clean + unemployment_pct_clean + internet_users_pct_clean,Adds macro and digital indicators on top of lag GDP.
+Model 3 - Full Dynamic,Dynamic pooled OLS,target_log_gdp_next_year ~ log_gdp_per_capita + log_population_total + life_expectancy_years + inflation_pct_clean + unemployment_pct_clean + internet_users_pct_clean + asian_financial_crisis_9798 + global_financial_crisis_0809 + C(wb_region) + year_trend,"Full predictive model with lag GDP, extra drivers, trainable event dummies, region effects, and a linear time trend."

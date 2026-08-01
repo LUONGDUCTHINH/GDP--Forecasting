@@ -1,0 +1,5 @@
+term,coefficient,std_error,p_value,ci_lower,ci_upper
+target_year_covid_shock_2020,-0.104352,0.009544,0.0,-0.123058,-0.085645
+target_year_covid_rebound_2021,0.096148,0.009027,0.0,0.078456,0.11384
+target_year_ukraine_energy_shock_2022_2024,0.031286,0.009984,0.001727,0.011717,0.050855
+target_year_high_global_rates_2023_2024,-0.009071,0.012283,0.460204,-0.033146,0.015004

@@ -1,0 +1,11 @@
+target_year,actual_mean_gdp,predicted_mean_gdp,mean_absolute_percentage_error_pct,model_label,absolute_gap_usd,pred_to_actual_ratio
+2019,15698.9605,16322.282,5.295,Base full dynamic,623.3215,1.0397
+2020,14549.3612,16082.2806,12.8234,Base full dynamic,1532.9194,1.1054
+2021,17155.0981,15109.1983,10.2731,Base full dynamic,2045.8998,0.8807
+2022,18048.6179,17684.3299,8.1097,Base full dynamic,364.2879,0.9798
+2023,18914.0876,18471.0834,7.5337,Base full dynamic,443.0042,0.9766
+2019,15698.9605,16240.229,5.0016,Shock-adjusted supplementary,541.2685,1.0345
+2020,14549.3612,14411.3324,8.3718,Shock-adjusted supplementary,138.0288,0.9905
+2021,17155.0981,16535.5155,6.9781,Shock-adjusted supplementary,619.5826,0.9639
+2022,18048.6179,18130.7974,8.3153,Shock-adjusted supplementary,82.1796,1.0046
+2023,18914.0876,18761.223,7.3633,Shock-adjusted supplementary,152.8647,0.9919

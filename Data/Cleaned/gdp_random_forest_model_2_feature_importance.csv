@@ -1,0 +1,7 @@
+feature,importance
+log_gdp_per_capita,0.7495648121000525
+life_expectancy_years,0.20319373587439823
+internet_users_pct_clean,0.0401144204364224
+unemployment_pct_clean,0.003604075836221618
+log_population_total,0.0022013053900833317
+inflation_pct_clean,0.0013216503628217875

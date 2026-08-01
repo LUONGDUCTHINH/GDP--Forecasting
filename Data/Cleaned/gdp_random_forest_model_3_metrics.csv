@@ -1,0 +1,5 @@
+model,model_family,model_note,split,scale,n_obs,MAE,RMSE,MAPE_pct,R_squared
+Random Forest Model 3 - Full Dynamic,Tree-based ML,"Random Forest version of Model 3 with lag GDP, extra drivers, crisis dummies, region effects, and year trend.",train,level_gdp_usd,3909,405.703,938.5716,4.0189,0.997
+Random Forest Model 3 - Full Dynamic,Tree-based ML,"Random Forest version of Model 3 with lag GDP, extra drivers, crisis dummies, region effects, and year trend.",train,log_gdp,3909,0.0399,0.0638,0.5094,0.9983
+Random Forest Model 3 - Full Dynamic,Tree-based ML,"Random Forest version of Model 3 with lag GDP, extra drivers, crisis dummies, region effects, and year trend.",test,level_gdp_usd,813,1653.6599,3966.4374,9.4865,0.9695
+Random Forest Model 3 - Full Dynamic,Tree-based ML,"Random Forest version of Model 3 with lag GDP, extra drivers, crisis dummies, region effects, and year trend.",test,log_gdp,813,0.0938,0.1287,1.0732,0.9917

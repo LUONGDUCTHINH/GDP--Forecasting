@@ -1,0 +1,16 @@
+spec,algorithm,n_obs
+Model 1,OLS,813
+Model 1,Ridge,1042
+Model 1,Elastic Net,1042
+Model 1,Random Forest,1042
+Model 1,XGBoost,1042
+Model 2,OLS,813
+Model 2,Ridge,813
+Model 2,Elastic Net,813
+Model 2,Random Forest,813
+Model 2,XGBoost,813
+Model 3,OLS,813
+Model 3,Ridge,813
+Model 3,Elastic Net,813
+Model 3,Random Forest,813
+Model 3,XGBoost,813

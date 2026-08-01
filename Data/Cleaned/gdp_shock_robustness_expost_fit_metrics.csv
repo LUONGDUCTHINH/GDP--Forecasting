@@ -1,0 +1,3 @@
+model_label,n_obs,AIC,BIC,MAE,RMSE,MAPE_pct,R_squared
+Base full dynamic,4722,-6104.7829,-6001.4231,1006.7025,2399.3517,8.7983,0.983
+Shock-adjusted supplementary,4722,-6320.1236,-6190.9238,959.0168,2270.3584,8.5249,0.9848

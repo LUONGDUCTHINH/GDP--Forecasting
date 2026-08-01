@@ -1,0 +1,16 @@
+model,term,coefficient,std_error,t_value,p_value,ci_lower,ci_upper
+Model 3 - Full Forecasting,Intercept,1.16445,0.285732,4.075323,4.6e-05,0.604426,1.724474
+Model 3 - Full Forecasting,C(wb_region)[T.Europe & Central Asia],0.115726,0.03974,2.912088,0.00359,0.037837,0.193614
+Model 3 - Full Forecasting,C(wb_region)[T.Latin America & Caribbean ],0.102822,0.03447,2.982931,0.002855,0.035262,0.170381
+Model 3 - Full Forecasting,"C(wb_region)[T.Middle East, North Africa, Afghanistan & Pakistan]",0.062908,0.045841,1.372322,0.169963,-0.026938,0.152754
+Model 3 - Full Forecasting,C(wb_region)[T.North America],0.69176,0.078495,8.812784,0.0,0.537913,0.845608
+Model 3 - Full Forecasting,C(wb_region)[T.South Asia],-0.522261,0.052609,-9.927223,0.0,-0.625373,-0.419149
+Model 3 - Full Forecasting,C(wb_region)[T.Sub-Saharan Africa ],0.63371,0.057117,11.095041,0.0,0.521764,0.745657
+Model 3 - Full Forecasting,log_population_total,-0.060729,0.00653,-9.300353,0.0,-0.073527,-0.047931
+Model 3 - Full Forecasting,life_expectancy_years,0.115982,0.003691,31.423424,0.0,0.108748,0.123216
+Model 3 - Full Forecasting,inflation_pct_clean,-0.005317,0.000703,-7.558283,0.0,-0.006696,-0.003938
+Model 3 - Full Forecasting,unemployment_pct_clean,0.007031,0.002647,2.656054,0.007906,0.001843,0.012219
+Model 3 - Full Forecasting,internet_users_pct_clean,0.02342,0.000754,31.080046,0.0,0.021943,0.024897
+Model 3 - Full Forecasting,asian_financial_crisis_9798,-0.160306,0.050571,-3.169894,0.001525,-0.259423,-0.061188
+Model 3 - Full Forecasting,global_financial_crisis_0809,0.151566,0.040215,3.768907,0.000164,0.072746,0.230385
+Model 3 - Full Forecasting,year_trend,-0.046499,0.002305,-20.172522,0.0,-0.051017,-0.041981

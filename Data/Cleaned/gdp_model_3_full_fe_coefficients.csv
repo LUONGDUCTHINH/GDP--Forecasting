@@ -1,0 +1,46 @@
+model,term,coefficient,std_error,t_value,p_value,ci_lower,ci_upper
+Model 3 - Full Fixed Effects,Intercept,2.203265,0.310373,7.09876,0.0,1.594945,2.811585
+Model 3 - Full Fixed Effects,C(wb_region)[T.Europe & Central Asia],0.099776,0.034423,2.898497,0.00375,0.032307,0.167244
+Model 3 - Full Fixed Effects,C(wb_region)[T.Latin America & Caribbean ],0.092718,0.030162,3.073991,0.002112,0.033601,0.151835
+Model 3 - Full Fixed Effects,"C(wb_region)[T.Middle East, North Africa, Afghanistan & Pakistan]",-0.001296,0.040742,-0.031809,0.974625,-0.081149,0.078557
+Model 3 - Full Fixed Effects,C(wb_region)[T.North America],0.710176,0.071533,9.927931,0.0,0.569973,0.850378
+Model 3 - Full Fixed Effects,C(wb_region)[T.South Asia],-0.535735,0.048393,-11.070471,0.0,-0.630584,-0.440887
+Model 3 - Full Fixed Effects,C(wb_region)[T.Sub-Saharan Africa ],0.516341,0.04954,10.422789,0.0,0.419245,0.613437
+Model 3 - Full Fixed Effects,C(year)[T.1992],-0.179126,0.163171,-1.097784,0.272299,-0.498935,0.140682
+Model 3 - Full Fixed Effects,C(year)[T.1993],-0.255145,0.157324,-1.621778,0.104851,-0.563495,0.053205
+Model 3 - Full Fixed Effects,C(year)[T.1994],-0.348755,0.148153,-2.354023,0.018571,-0.63913,-0.058381
+Model 3 - Full Fixed Effects,C(year)[T.1995],-0.539876,0.142045,-3.800735,0.000144,-0.81828,-0.261473
+Model 3 - Full Fixed Effects,C(year)[T.1996],-0.734225,0.138903,-5.285873,0.0,-1.00647,-0.46198
+Model 3 - Full Fixed Effects,C(year)[T.1997],-0.820076,0.138175,-5.935061,0.0,-1.090894,-0.549259
+Model 3 - Full Fixed Effects,C(year)[T.1998],-0.944846,0.138842,-6.805174,0.0,-1.216972,-0.67272
+Model 3 - Full Fixed Effects,C(year)[T.1999],-1.018096,0.136094,-7.480853,0.0,-1.284834,-0.751357
+Model 3 - Full Fixed Effects,C(year)[T.2000],-1.118679,0.134069,-8.34408,0.0,-1.381449,-0.85591
+Model 3 - Full Fixed Effects,C(year)[T.2001],-1.186466,0.134044,-8.851323,0.0,-1.449187,-0.923745
+Model 3 - Full Fixed Effects,C(year)[T.2002],-1.181397,0.134378,-8.791588,0.0,-1.444773,-0.91802
+Model 3 - Full Fixed Effects,C(year)[T.2003],-1.109828,0.135048,-8.218052,0.0,-1.374517,-0.84514
+Model 3 - Full Fixed Effects,C(year)[T.2004],-1.080081,0.135069,-7.996501,0.0,-1.344811,-0.81535
+Model 3 - Full Fixed Effects,C(year)[T.2005],-1.052727,0.134539,-7.824698,0.0,-1.316418,-0.789035
+Model 3 - Full Fixed Effects,C(year)[T.2006],-0.994382,0.133804,-7.431634,0.0,-1.256633,-0.732131
+Model 3 - Full Fixed Effects,C(year)[T.2007],-0.951833,0.133095,-7.151517,0.0,-1.212695,-0.690971
+Model 3 - Full Fixed Effects,C(year)[T.2008],-1.095771,0.131511,-8.332182,0.0,-1.353527,-0.838015
+Model 3 - Full Fixed Effects,C(year)[T.2009],-1.124356,0.133615,-8.414906,0.0,-1.386237,-0.862476
+Model 3 - Full Fixed Effects,C(year)[T.2010],-1.132879,0.133239,-8.502635,0.0,-1.394022,-0.871737
+Model 3 - Full Fixed Effects,C(year)[T.2011],-1.214633,0.132649,-9.156714,0.0,-1.474622,-0.954645
+Model 3 - Full Fixed Effects,C(year)[T.2012],-1.28308,0.132286,-9.699262,0.0,-1.542356,-1.023803
+Model 3 - Full Fixed Effects,C(year)[T.2013],-1.378167,0.131978,-10.442372,0.0,-1.63684,-1.119494
+Model 3 - Full Fixed Effects,C(year)[T.2014],-1.569834,0.132629,-11.836246,0.0,-1.829782,-1.309885
+Model 3 - Full Fixed Effects,C(year)[T.2015],-1.688471,0.131819,-12.809022,0.0,-1.946831,-1.43011
+Model 3 - Full Fixed Effects,C(year)[T.2016],-1.725969,0.132954,-12.981749,0.0,-1.986553,-1.465385
+Model 3 - Full Fixed Effects,C(year)[T.2017],-1.760114,0.133513,-13.183133,0.0,-2.021794,-1.498434
+Model 3 - Full Fixed Effects,C(year)[T.2018],-1.868783,0.134119,-13.933749,0.0,-2.131651,-1.605914
+Model 3 - Full Fixed Effects,C(year)[T.2019],-2.019327,0.135796,-14.870273,0.0,-2.285483,-1.753171
+Model 3 - Full Fixed Effects,C(year)[T.2020],-1.931749,0.136767,-14.124368,0.0,-2.199807,-1.66369
+Model 3 - Full Fixed Effects,C(year)[T.2021],-1.856952,0.137952,-13.460903,0.0,-2.127333,-1.586572
+Model 3 - Full Fixed Effects,C(year)[T.2022],-1.970405,0.146964,-13.407398,0.0,-2.258449,-1.68236
+Model 3 - Full Fixed Effects,log_population_total,-0.059721,0.00572,-10.440506,0.0,-0.070933,-0.04851
+Model 3 - Full Fixed Effects,life_expectancy_years,0.107753,0.003572,30.164934,0.0,0.100751,0.114754
+Model 3 - Full Fixed Effects,inflation_pct_clean,-0.005922,0.00074,-7.999834,0.0,-0.007372,-0.004471
+Model 3 - Full Fixed Effects,unemployment_pct_clean,0.005187,0.00226,2.295233,0.02172,0.000758,0.009616
+Model 3 - Full Fixed Effects,internet_users_pct_clean,0.0244,0.000683,35.723141,0.0,0.023061,0.025739
+Model 3 - Full Fixed Effects,asia_crisis_exposed_9798,-0.159026,0.139292,-1.141674,0.25359,-0.432032,0.113981
+Model 3 - Full Fixed Effects,energy_shock_exposed_2022_2024,0.012421,0.107549,0.115495,0.908052,-0.198371,0.223214

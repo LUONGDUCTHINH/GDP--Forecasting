@@ -1,0 +1,2 @@
+spec,algorithm,n_obs,MAE,RMSE,MAPE_pct,R_squared,spec_number,rank_mae,rank_rmse,rank_mape,rank_r2,rank_score
+Model 3,OLS,813,1468.1942,3472.995,8.8964,0.9766,3,1.0,2.0,1.0,2.0,6.0

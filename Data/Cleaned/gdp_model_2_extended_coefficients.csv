@@ -1,0 +1,7 @@
+term,coefficient,std_error,t_value,p_value,ci_lower,ci_upper
+Intercept,1.530054,0.19779,7.735755,0.0,1.142393,1.917715
+log_population_total,-0.067027,0.006932,-9.668657,0.0,-0.080614,-0.05344
+life_expectancy_years,0.106741,0.002474,43.141639,0.0,0.101892,0.11159
+inflation_pct_clean,-0.003642,0.000693,-5.259484,0.0,-0.005,-0.002285
+unemployment_pct_clean,0.00986,0.002629,3.749941,0.000177,0.004706,0.015013
+internet_users_pct_clean,0.016993,0.00063,26.981582,0.0,0.015759,0.018227

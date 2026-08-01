@@ -1,0 +1,22 @@
+model,wb_region,n_obs,MAE,RMSE,MAPE_pct,R_squared
+Model 1 - Baseline Dynamic,Sub-Saharan Africa ,204,230.8034,438.6461,8.5355,0.9638
+Model 1 - Baseline Dynamic,South Asia,30,455.0916,1065.1038,9.2019,0.8908
+Model 1 - Baseline Dynamic,Latin America & Caribbean ,127,1052.1164,1690.6732,9.9383,0.9414
+Model 1 - Baseline Dynamic,Europe & Central Asia,229,2205.4422,3869.955,7.6347,0.9816
+Model 1 - Baseline Dynamic,"Middle East, North Africa, Afghanistan & Pakistan",102,2269.7581,4101.5655,13.3306,0.9588
+Model 1 - Baseline Dynamic,North America,10,3940.0122,4515.1471,6.5636,0.8549
+Model 1 - Baseline Dynamic,East Asia & Pacific,111,2231.1069,6035.8631,8.9671,0.9327
+Model 2 - Extended Dynamic,Sub-Saharan Africa ,204,227.3028,431.9691,8.3751,0.9649
+Model 2 - Extended Dynamic,South Asia,30,453.0826,1054.7195,9.048,0.8929
+Model 2 - Extended Dynamic,Latin America & Caribbean ,127,1064.7795,1697.7984,9.9925,0.9409
+Model 2 - Extended Dynamic,Europe & Central Asia,229,2191.6278,3893.8255,7.6082,0.9814
+Model 2 - Extended Dynamic,"Middle East, North Africa, Afghanistan & Pakistan",102,2242.6533,4097.7457,13.0988,0.9589
+Model 2 - Extended Dynamic,North America,10,4041.5398,4721.2783,6.6434,0.8414
+Model 2 - Extended Dynamic,East Asia & Pacific,111,2172.4631,6015.5151,8.6964,0.9332
+Model 3 - Full Dynamic,Sub-Saharan Africa ,204,219.8328,418.5862,8.0586,0.967
+Model 3 - Full Dynamic,South Asia,30,456.2677,1050.442,9.0731,0.8937
+Model 3 - Full Dynamic,Latin America & Caribbean ,127,1072.7444,1704.6466,9.9997,0.9404
+Model 3 - Full Dynamic,Europe & Central Asia,229,2197.3619,3891.2235,7.5928,0.9814
+Model 3 - Full Dynamic,"Middle East, North Africa, Afghanistan & Pakistan",102,2180.5993,4101.497,12.602,0.9588
+Model 3 - Full Dynamic,North America,10,3908.4328,4519.9519,6.4927,0.8546
+Model 3 - Full Dynamic,East Asia & Pacific,111,2109.6224,5988.4792,8.6273,0.9338

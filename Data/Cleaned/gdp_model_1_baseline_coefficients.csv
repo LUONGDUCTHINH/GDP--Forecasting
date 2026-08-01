@@ -1,0 +1,4 @@
+term,coefficient,std_error,t_value,p_value,ci_lower,ci_upper
+Intercept,0.622312,0.095145,6.540685,0.0,0.435832,0.808792
+log_population_total,-0.094483,0.004121,-22.92618,0.0,-0.10256,-0.086406
+life_expectancy_years,0.130353,0.000977,133.421497,0.0,0.128438,0.132268
