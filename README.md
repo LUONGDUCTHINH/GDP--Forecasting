@@ -1,5 +1,7 @@
 # Global GDP per Capita Forecasting and Economic Drivers
 
+Streamlit dashboard for GDP per capita analysis, forecasting, and model comparison using World Bank-style country-year data.
+
 ## Dashboard Purpose
 
 This repository contains a Final Year Project focused on **GDP-first analysis and forecasting** using World Bank-style country-year data. The new Streamlit entrypoint (`app.py`) presents the project as a clean workflow dashboard:
@@ -146,14 +148,30 @@ streamlit run app.py
 
 ```text
 Final Project/
+├── README.md
+├── requirements.txt
 ├── app.py
 ├── .streamlit/
+├── assets/
 ├── src/
 ├── views/
 ├── Data/
 │   ├── Raw/
 │   └── Cleaned/
+│       ├── 02_Time_Series_Details/
+│       ├── 03_Main_Model_Details/
+│       ├── 04_Benchmark_Models/
+│       ├── 05_Model_Comparisons/
+│       ├── 06_Future_Forecasts/
+│       ├── 07_Legacy_Models/
+│       └── 08_Robustness_Checks/
 ├── Analysis/
+│   ├── 01_EDA/
+│   ├── 02_Data_Preparation/
+│   ├── 03_Core_Models/
+│   ├── 04_Benchmarks/
+│   ├── 05_Forecasting/
+│   └── 99_Archive/
 └── output/
 ```
 
@@ -168,4 +186,3 @@ Final Project/
 ## Optional Benchmark Note
 
 Some notebooks in [`Analysis`](/Users/tonytony/Final Project/Analysis) include Random Forest and XGBoost benchmark work. The dashboard keeps those as secondary repository outputs and preserves the dynamic pooled OLS models as the main academic modelling layer.
-# GDP--Forecasting
