@@ -1,27 +1,24 @@
 # %%
 """
-Model 1 - Baseline GDP prediction
+Model 2 - Extended GDP prediction
 
 Equation:
     GDP_(t+1) ~ Population_t + LifeExpectancy_t
+               + Inflation_t + Unemployment_t + InternetUsage_t
 
 Implementation choice:
-    - Target is modeled in log scale:
-      target_log_gdp_next_year ~ log_population_total + life_expectancy_years
+    - Target is modeled in log scale
     - Estimator: Pooled OLS with HC3 robust standard errors
-    - Split: time-based train/test split
-
-This file is written with `# %%` cell markers so you can run it like a notebook
-inside VS Code, or run it as a normal Python script.
+    - Split: train feature years <= 2017, test feature years 2018 to 2022
 """
 
 # %%
 from pathlib import Path
 import sys
 
+import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
 import seaborn as sns
 import statsmodels.formula.api as smf
 
@@ -31,10 +28,15 @@ sns.set_theme(style="whitegrid")
 plt.rcParams["figure.figsize"] = (12, 6)
 
 
-if "__file__" in globals():
-    BASE_DIR = Path(__file__).resolve().parents[1]
-else:
-    BASE_DIR = Path("/Users/tonytony/Final Project")
+def resolve_base_dir() -> Path:
+    if "__file__" in globals():
+        for candidate in Path(__file__).resolve().parents:
+            if (candidate / "Data").exists() and (candidate / "app.py").exists():
+                return candidate
+    return Path("/Users/tonytony/Final Project")
+
+
+BASE_DIR = resolve_base_dir()
 
 DATA_PATH = BASE_DIR / "Data" / "Cleaned" / "panel_with_event_dummies_and_extra_drivers.csv"
 OUTPUT_DIR = BASE_DIR / "Data" / "Cleaned"
@@ -43,8 +45,11 @@ TRAIN_END_YEAR = 2017
 TEST_START_YEAR = 2018
 TEST_END_YEAR = 2022
 
-MODEL_NAME = "Model 1 - Baseline Pooled OLS"
-FORMULA = "target_log_gdp_next_year ~ log_population_total + life_expectancy_years"
+MODEL_NAME = "Model 2 - Extended Pooled OLS"
+FORMULA = (
+    "target_log_gdp_next_year ~ log_population_total + life_expectancy_years "
+    "+ inflation_pct_clean + unemployment_pct_clean + internet_users_pct_clean"
+)
 
 print("Base dir:", BASE_DIR)
 print("Data path:", DATA_PATH)
@@ -95,7 +100,6 @@ def build_prediction_frame(model, df):
     pred_df["absolute_percentage_error_pct"] = (
         pred_df["absolute_error_usd"] / pred_df["actual_gdp_next_year"]
     ) * 100
-
     return pred_df
 
 
@@ -134,10 +138,12 @@ model_cols = [
     "wb_region",
     "year",
     "gdp_per_capita_usd",
-    "log_gdp_per_capita",
     "population_total",
     "log_population_total",
     "life_expectancy_years",
+    "inflation_pct_clean",
+    "unemployment_pct_clean",
+    "internet_users_pct_clean",
     "target_log_gdp_next_year",
 ]
 
@@ -147,10 +153,12 @@ model_df = panel_df.dropna().copy()
 numeric_cols = [
     "year",
     "gdp_per_capita_usd",
-    "log_gdp_per_capita",
     "population_total",
     "log_population_total",
     "life_expectancy_years",
+    "inflation_pct_clean",
+    "unemployment_pct_clean",
+    "internet_users_pct_clean",
     "target_log_gdp_next_year",
 ]
 for col in numeric_cols:
@@ -162,7 +170,7 @@ model_df["country_name"] = model_df["country_name"].astype(str)
 model_df["country_code"] = model_df["country_code"].astype(str)
 model_df["year"] = model_df["year"].astype(int)
 
-print("Model 1 sample shape:", model_df.shape)
+print("Model 2 sample shape:", model_df.shape)
 print("Feature-year range:", int(model_df["year"].min()), "-", int(model_df["year"].max()))
 print(
     "Target-year range:",
@@ -194,30 +202,24 @@ print(
     "-",
     int(test_df["year"].max()),
 )
-print(
-    "Test target years:",
-    int((test_df["year"] + 1).min()),
-    "-",
-    int((test_df["year"] + 1).max()),
-)
 
 
 # %%
-model_1 = smf.ols(formula=FORMULA, data=train_df).fit(cov_type="HC3")
+model_2 = smf.ols(formula=FORMULA, data=train_df).fit(cov_type="HC3")
 
 print(MODEL_NAME)
-print(model_1.summary())
+print(model_2.summary())
 
 
 # %%
-coef_ci = model_1.conf_int()
+coef_ci = model_2.conf_int()
 coef_table = pd.DataFrame(
     {
-        "term": model_1.params.index,
-        "coefficient": model_1.params.values,
-        "std_error": model_1.bse.values,
-        "t_value": model_1.tvalues.values,
-        "p_value": model_1.pvalues.values,
+        "term": model_2.params.index,
+        "coefficient": model_2.params.values,
+        "std_error": model_2.bse.values,
+        "t_value": model_2.tvalues.values,
+        "p_value": model_2.pvalues.values,
         "ci_lower": coef_ci[0].values,
         "ci_upper": coef_ci[1].values,
     }
@@ -227,25 +229,8 @@ coef_table
 
 
 # %%
-train_predictions_df = build_prediction_frame(model=model_1, df=train_df)
-test_predictions_df = build_prediction_frame(model=model_1, df=test_df)
-
-train_metrics_level = regression_metrics(
-    actual=train_predictions_df["actual_gdp_next_year"],
-    predicted=train_predictions_df["predicted_gdp_next_year"],
-)
-test_metrics_level = regression_metrics(
-    actual=test_predictions_df["actual_gdp_next_year"],
-    predicted=test_predictions_df["predicted_gdp_next_year"],
-)
-train_metrics_log = regression_metrics(
-    actual=train_predictions_df["actual_log_gdp_next_year"],
-    predicted=train_predictions_df["predicted_log_gdp_next_year"],
-)
-test_metrics_log = regression_metrics(
-    actual=test_predictions_df["actual_log_gdp_next_year"],
-    predicted=test_predictions_df["predicted_log_gdp_next_year"],
-)
+train_predictions_df = build_prediction_frame(model=model_2, df=train_df)
+test_predictions_df = build_prediction_frame(model=model_2, df=test_df)
 
 metrics_df = pd.DataFrame(
     [
@@ -254,28 +239,40 @@ metrics_df = pd.DataFrame(
             "scale": "level_gdp_usd",
             "model": MODEL_NAME,
             "n_obs": len(train_predictions_df),
-            **train_metrics_level,
+            **regression_metrics(
+                actual=train_predictions_df["actual_gdp_next_year"],
+                predicted=train_predictions_df["predicted_gdp_next_year"],
+            ),
         },
         {
             "split": "train",
             "scale": "log_gdp",
             "model": MODEL_NAME,
             "n_obs": len(train_predictions_df),
-            **train_metrics_log,
+            **regression_metrics(
+                actual=train_predictions_df["actual_log_gdp_next_year"],
+                predicted=train_predictions_df["predicted_log_gdp_next_year"],
+            ),
         },
         {
             "split": "test",
             "scale": "level_gdp_usd",
             "model": MODEL_NAME,
             "n_obs": len(test_predictions_df),
-            **test_metrics_level,
+            **regression_metrics(
+                actual=test_predictions_df["actual_gdp_next_year"],
+                predicted=test_predictions_df["predicted_gdp_next_year"],
+            ),
         },
         {
             "split": "test",
             "scale": "log_gdp",
             "model": MODEL_NAME,
             "n_obs": len(test_predictions_df),
-            **test_metrics_log,
+            **regression_metrics(
+                actual=test_predictions_df["actual_log_gdp_next_year"],
+                predicted=test_predictions_df["predicted_log_gdp_next_year"],
+            ),
         },
     ]
 ).round(4)
@@ -285,29 +282,11 @@ metrics_df
 
 # %%
 region_metrics_df = build_region_metrics(test_predictions_df).round(4)
-region_metrics_df.head(15)
+region_metrics_df
 
 
 # %%
-test_preview_cols = [
-    "country_name",
-    "country_code",
-    "wb_region",
-    "feature_year",
-    "target_year",
-    "actual_gdp_next_year",
-    "predicted_gdp_next_year",
-    "absolute_error_usd",
-    "absolute_percentage_error_pct",
-]
-
-test_predictions_df[test_preview_cols].sort_values(
-    ["country_name", "feature_year"]
-).head(20)
-
-
-# %%
-yearly_plot_df = (
+country_plot_df = (
     test_predictions_df.groupby("target_year", as_index=False)[
         ["actual_gdp_next_year", "predicted_gdp_next_year"]
     ]
@@ -315,72 +294,38 @@ yearly_plot_df = (
     .sort_values("target_year")
 )
 
-plt.figure(figsize=(12, 6))
 plt.plot(
-    yearly_plot_df["target_year"],
-    yearly_plot_df["actual_gdp_next_year"],
+    country_plot_df["target_year"],
+    country_plot_df["actual_gdp_next_year"],
     marker="o",
-    linewidth=2.2,
+    linewidth=2.5,
     label="Actual GDP per Capita",
 )
 plt.plot(
-    yearly_plot_df["target_year"],
-    yearly_plot_df["predicted_gdp_next_year"],
+    country_plot_df["target_year"],
+    country_plot_df["predicted_gdp_next_year"],
     marker="o",
-    linewidth=2.2,
+    linewidth=2.5,
     linestyle="--",
     label="Predicted GDP per Capita",
 )
-plt.title("Model 1 Test Performance: Average Actual vs Predicted GDP per Capita")
+plt.title("Model 2: Actual vs Predicted GDP per Capita")
 plt.xlabel("Target Year")
 plt.ylabel("GDP per Capita (US$)")
 plt.legend()
 plt.tight_layout()
-yearly_plot_path = OUTPUT_DIR / "gdp_model_1_baseline_yearly_test_plot.png"
-plt.savefig(yearly_plot_path, dpi=200, bbox_inches="tight")
 show_or_close_plot()
 
 
 # %%
-scatter_sample_df = test_predictions_df.sample(
-    n=min(800, len(test_predictions_df)),
-    random_state=42,
-).copy()
-
-plt.figure(figsize=(8, 8))
-plt.scatter(
-    scatter_sample_df["actual_gdp_next_year"],
-    scatter_sample_df["predicted_gdp_next_year"],
-    alpha=0.55,
-)
-
-min_val = min(
-    scatter_sample_df["actual_gdp_next_year"].min(),
-    scatter_sample_df["predicted_gdp_next_year"].min(),
-)
-max_val = max(
-    scatter_sample_df["actual_gdp_next_year"].max(),
-    scatter_sample_df["predicted_gdp_next_year"].max(),
-)
-plt.plot([min_val, max_val], [min_val, max_val], linestyle="--", color="red")
-plt.title("Model 1 Test Scatter: Actual vs Predicted GDP per Capita")
-plt.xlabel("Actual GDP per Capita (US$)")
-plt.ylabel("Predicted GDP per Capita (US$)")
-plt.tight_layout()
-scatter_plot_path = OUTPUT_DIR / "gdp_model_1_baseline_scatter_test_plot.png"
-plt.savefig(scatter_plot_path, dpi=200, bbox_inches="tight")
-show_or_close_plot()
-
-
-# %%
-metrics_path = OUTPUT_DIR / "gdp_model_1_baseline_metrics.csv"
-coef_path = OUTPUT_DIR / "gdp_model_1_baseline_coefficients.csv"
-test_pred_path = OUTPUT_DIR / "gdp_model_1_baseline_test_predictions.csv"
-region_metrics_path = OUTPUT_DIR / "gdp_model_1_baseline_region_metrics.csv"
+metrics_path = OUTPUT_DIR / "gdp_model_2_extended_metrics.csv"
+coef_path = OUTPUT_DIR / "gdp_model_2_extended_coefficients.csv"
+test_pred_path = OUTPUT_DIR / "gdp_model_2_extended_test_predictions.csv"
+region_metrics_path = OUTPUT_DIR / "gdp_model_2_extended_region_metrics.csv"
 
 metrics_df.to_csv(metrics_path, index=False)
 coef_table.to_csv(coef_path, index=False)
-test_predictions_df[test_preview_cols].round(4).to_csv(test_pred_path, index=False)
+test_predictions_df.to_csv(test_pred_path, index=False)
 region_metrics_df.to_csv(region_metrics_path, index=False)
 
 print("Saved:")
@@ -388,14 +333,3 @@ print("-", metrics_path)
 print("-", coef_path)
 print("-", test_pred_path)
 print("-", region_metrics_path)
-print("-", yearly_plot_path)
-print("-", scatter_plot_path)
-
-
-# %%
-# Important interpretation note:
-# Model 1 predicts next-year GDP from same-year population and life expectancy.
-# For a truly future target year such as 2040, we would first need:
-#   1. Population_2039
-#   2. LifeExpectancy_2039
-# Those inputs can come from the separate time-series forecasting models you built.

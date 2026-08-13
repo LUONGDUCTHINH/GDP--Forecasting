@@ -21,10 +21,15 @@ import pandas as pd
 import statsmodels.formula.api as smf
 
 
-if "__file__" in globals():
-    BASE_DIR = Path(__file__).resolve().parents[1]
-else:
-    BASE_DIR = Path("/Users/tonytony/Final Project")
+def resolve_base_dir() -> Path:
+    if "__file__" in globals():
+        for candidate in Path(__file__).resolve().parents:
+            if (candidate / "Data").exists() and (candidate / "app.py").exists():
+                return candidate
+    return Path("/Users/tonytony/Final Project")
+
+
+BASE_DIR = resolve_base_dir()
 
 DATA_PATH = BASE_DIR / "Data" / "Cleaned" / "panel_with_event_dummies_and_extra_drivers.csv"
 OUTPUT_DIR = BASE_DIR / "Data" / "Cleaned"

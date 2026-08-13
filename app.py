@@ -15,60 +15,132 @@ from views.relationships import render as render_relationships
 
 st.set_page_config(
     page_title=DASHBOARD_TITLE,
+    page_icon="🌍",
     layout="wide",
     initial_sidebar_state="expanded",
 )
 
 inject_global_styles()
 
-PAGE_MAP = {
-    "Executive Overview": render_overview,
-    "Data Workflow": render_data_workflow,
-    "Global GDP Trends": render_gdp_trends,
-    "GDP Growth and Country Comparison": render_country_comparison,
-    "GDP Relationships": render_relationships,
-    "GDP Forecasting": render_forecasting,
-    "Findings and Limitations": render_conclusions,
-}
+
+PAGE_CONFIG = [
+    {
+        "key": "overview",
+        "title": "Project Overview",
+        "icon": "🏠",
+        "url_path": "overview",
+        "render": render_overview,
+    },
+    {
+        "key": "data",
+        "title": "Data Workflow",
+        "icon": "📂",
+        "url_path": "data-workflow",
+        "render": render_data_workflow,
+    },
+    {
+        "key": "eda",
+        "title": "Exploratory Analysis",
+        "icon": "📊",
+        "url_path": "exploratory-analysis",
+        "render": render_gdp_trends,
+    },
+    {
+        "key": "comparison",
+        "title": "Country Comparison",
+        "icon": "🌍",
+        "url_path": "country-comparison",
+        "render": render_country_comparison,
+    },
+    {
+        "key": "relationships",
+        "title": "GDP Relationships",
+        "icon": "🔗",
+        "url_path": "gdp-relationships",
+        "render": render_relationships,
+    },
+    {
+        "key": "forecasting",
+        "title": "GDP Forecasting Models",
+        "icon": "📈",
+        "url_path": "gdp-forecasting-models",
+        "render": render_forecasting,
+    },
+    {
+        "key": "conclusions",
+        "title": "Findings & Conclusions",
+        "icon": "📑",
+        "url_path": "findings-and-conclusions",
+        "render": render_conclusions,
+    },
+]
 
 
-def render_sidebar_title() -> None:
-    """Render a concise sidebar introduction."""
-    st.sidebar.markdown(f"## {DASHBOARD_TITLE}")
+def render_sidebar_header() -> None:
+    """Render the project identity and research workflow in the sidebar."""
+    st.sidebar.markdown(f"## 🌍 {DASHBOARD_TITLE}")
     st.sidebar.caption(PROJECT_TITLE)
+
+    st.sidebar.markdown("---")
+    st.sidebar.markdown("### Analytical workflow")
     st.sidebar.caption(
-        "GDP-first workflow dashboard built from the real cleaned panel, forecasting outputs, and saved evaluation files in this repository."
+        "Project Overview → Data Workflow → Exploratory Analysis → "
+        "Country Comparison → GDP Relationships → GDP Forecasting Models → "
+        "Findings & Conclusions"
+    )
+
+    st.sidebar.markdown("---")
+
+
+def render_sidebar_footer() -> None:
+    """Render concise project metadata below the navigation."""
+    st.sidebar.markdown("---")
+
+    st.sidebar.caption(
+        """
+Final Year Project
+
+BSc (Hons) Computing
+
+University of Greenwich
+
+Luong Duc Thinh · 2026
+"""
     )
 
 
 def run_navigation() -> None:
-    """Use Streamlit navigation when available, otherwise fall back to a radio menu."""
-    render_sidebar_title()
+    """Render the multipage dashboard with a compatible fallback menu."""
+    render_sidebar_header()
 
     if hasattr(st, "Page") and hasattr(st, "navigation"):
         pages = [
-            st.Page(render_overview, title="Executive Overview", url_path="overview"),
-            st.Page(render_data_workflow, title="Data Workflow", url_path="data-workflow"),
-            st.Page(render_gdp_trends, title="Global GDP Trends", url_path="gdp-trends"),
             st.Page(
-                render_country_comparison,
-                title="GDP Growth and Country Comparison",
-                url_path="country-comparison",
-            ),
-            st.Page(render_relationships, title="GDP Relationships", url_path="relationships"),
-            st.Page(render_forecasting, title="GDP Forecasting", url_path="forecasting"),
-            st.Page(
-                render_conclusions,
-                title="Findings and Limitations",
-                url_path="findings-and-limitations",
-            ),
+                page["render"],
+                title=f"{page['icon']} {page['title']}",
+                url_path=page["url_path"],
+            )
+            for page in PAGE_CONFIG
         ]
+
         navigation = st.navigation(pages, position="sidebar")
+        render_sidebar_footer()
         navigation.run()
         return
 
-    selected_page = st.sidebar.radio("Workflow pages", list(PAGE_MAP.keys()))
-    PAGE_MAP[selected_page]()
+    page_labels = [
+        f"{page['icon']} {page['title']}"
+        for page in PAGE_CONFIG
+    ]
+    selected_label = st.sidebar.radio(
+        "Dashboard sections",
+        page_labels,
+        index=0,
+    )
+
+    selected_index = page_labels.index(selected_label)
+    render_sidebar_footer()
+    PAGE_CONFIG[selected_index]["render"]()
 
 
 run_navigation()

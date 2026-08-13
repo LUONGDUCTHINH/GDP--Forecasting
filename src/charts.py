@@ -265,12 +265,27 @@ def build_missingness_chart(missing_df: pd.DataFrame) -> go.Figure:
 
 
 def build_main_model_yearly_chart(yearly_df: pd.DataFrame) -> go.Figure:
-    """Plot actual versus predicted mean GDP by target year for the main models."""
+    """Plot annual mean actual and predicted GDP across train and test periods."""
     if yearly_df.empty:
         return empty_figure("No yearly main-model summary is available.")
 
+    plot_df = yearly_df.copy()
+    plot_df["target_year"] = pd.to_numeric(
+        plot_df["target_year"],
+        errors="coerce",
+    )
+    plot_df = plot_df.dropna(subset=["target_year"]).copy()
+    plot_df["target_year"] = plot_df["target_year"].astype(int)
+
+    if "split" not in plot_df.columns:
+        plot_df["split"] = "Test"
+
     fig = go.Figure()
-    actual_df = yearly_df.drop_duplicates(subset=["target_year"]).sort_values("target_year")
+
+    actual_df = (
+        plot_df.drop_duplicates(subset=["target_year"])
+        .sort_values("target_year")
+    )
     fig.add_trace(
         go.Scatter(
             x=actual_df["target_year"],
@@ -278,13 +293,14 @@ def build_main_model_yearly_chart(yearly_df: pd.DataFrame) -> go.Figure:
             mode="lines+markers",
             name="Actual mean GDP per capita",
             line=dict(color=NAVY, width=3),
+            marker=dict(size=5),
         )
     )
 
-    palette = ["#2563EB", "#0F766E", "#9333EA", "#DC2626"]
+    palette = ["#2563EB", "#0F766E", "#9333EA"]
     for color, (model_name, model_df) in zip(
         palette,
-        yearly_df.groupby("model", sort=False),
+        plot_df.groupby("model", sort=False),
     ):
         ordered_df = model_df.sort_values("target_year")
         fig.add_trace(
@@ -293,13 +309,82 @@ def build_main_model_yearly_chart(yearly_df: pd.DataFrame) -> go.Figure:
                 y=ordered_df["predicted_mean_gdp"],
                 mode="lines+markers",
                 name=model_name,
-                line=dict(color=color, width=2.6, dash="dash"),
+                line=dict(color=color, width=2.4, dash="dash"),
+                marker=dict(size=4),
             )
         )
 
-    fig.update_xaxes(title="Target year")
+    test_rows = plot_df[
+        plot_df["split"].astype(str).str.lower() == "test"
+    ]
+    if not test_rows.empty:
+        test_start = int(test_rows["target_year"].min())
+        fig.add_vline(
+            x=test_start - 0.5,
+            line_dash="dot",
+            line_color=SLATE,
+            annotation_text="Shared holdout begins",
+            annotation_position="top left",
+        )
+
+        train_rows = plot_df[
+            plot_df["split"].astype(str).str.lower() == "train"
+        ]
+        if not train_rows.empty:
+            fig.add_vrect(
+                x0=int(train_rows["target_year"].min()) - 0.5,
+                x1=int(train_rows["target_year"].max()) + 0.5,
+                fillcolor="#F8FAFC",
+                opacity=0.45,
+                line_width=0,
+                layer="below",
+                annotation_text="Training period",
+                annotation_position="top left",
+            )
+        fig.add_vrect(
+            x0=test_start - 0.5,
+            x1=int(test_rows["target_year"].max()) + 0.5,
+            fillcolor="#EFF6FF",
+            opacity=0.28,
+            line_width=0,
+            layer="below",
+            annotation_text="Shared holdout",
+            annotation_position="top right",
+        )
+
+    min_year = int(plot_df["target_year"].min())
+    max_year = int(plot_df["target_year"].max())
+    tick_step = 2 if (max_year - min_year) <= 25 else 3
+
+    fig.update_xaxes(
+        title="Target year",
+        tickmode="linear",
+        tick0=min_year,
+        dtick=tick_step,
+        tickformat="d",
+        range=[min_year - 0.5, max_year + 0.5],
+    )
     fig.update_yaxes(title="GDP per Capita (current US$)")
-    return apply_standard_layout(fig, title="Main GDP model comparison on the shared test years", height=440)
+
+    fig = apply_standard_layout(
+        fig,
+        title=(
+            "Main GDP model performance across training and shared holdout periods"
+        ),
+        height=500,
+    )
+    fig.update_layout(
+        margin=dict(l=14, r=14, t=68, b=90),
+        legend=dict(
+            orientation="h",
+            yanchor="top",
+            y=-0.16,
+            xanchor="left",
+            x=0.0,
+            font=dict(size=10),
+        ),
+    )
+    return fig
 
 
 def build_forecast_chart(

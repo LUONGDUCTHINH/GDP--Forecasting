@@ -1,12 +1,20 @@
 from __future__ import annotations
 
+from pathlib import Path
+
 import numpy as np
 import pandas as pd
 import streamlit as st
 
 from src.analytics import build_model_test_table, get_best_main_model
 from src.charts import build_forecast_chart, build_main_model_yearly_chart, build_multi_forecast_chart
-from src.components import render_metric_card, render_note_box, render_page_header
+from src.components import (
+    render_insight_box,
+    render_metric_card,
+    render_note_box,
+    render_page_header,
+    render_pipeline,
+)
 from src.dashboard_data import (
     EVENT_TIMELINE_PATH,
     GDP_TS_FIG_PATH,
@@ -31,6 +39,13 @@ try:
 except ImportError:
     HAS_STATSMODELS_FORMULA = False
 
+
+
+GDP_BENCHMARK_FIG_PATH = (
+    Path(__file__).resolve().parents[1]
+    / "assets"
+    / "figure18_gdp_benchmark.png"
+)
 
 DATASET_META = {
     "gdp": {
@@ -86,6 +101,9 @@ FUTURE_PROJECTION_MODELS = {
     "population": "LogHolt",
     "life_expectancy": "Holt",
 }
+
+FINAL_SELECTED_MAIN_MODEL = "Model 3 - Full Dynamic"
+
 
 
 def _format_indicator_value(dataset_key: str, value: float) -> str:
@@ -424,18 +442,35 @@ def render() -> None:
 
     render_page_header(
         active_key="forecasting",
-        title="GDP Forecasting",
-        question="How does the project forecast GDP, and how well do the real models perform on the shared test set?",
+        title="GDP Forecasting Models",
+        question=(
+            "Which models perform best for indicator-level forecasting, and how well do "
+            "the main GDP specifications predict next-year GDP per capita?"
+        ),
         description=(
-            "This page separates two roles in the repository: country-level time-series forecasting for annual indicators, "
-            "and rebuilt cross-country GDP prediction models evaluated on a shared out-of-sample test period."
+            "This page follows the two-stage modelling structure used in the report. "
+            "Stage 1 evaluates separate time-series models for GDP per capita, population, "
+            "and life expectancy using rolling 10-year backtesting. Stage 2 evaluates "
+            "progressively richer next-year GDP specifications on a shared holdout period "
+            "and then uses forecasted drivers to demonstrate future GDP scenarios."
         ),
         chips=[
-            "Time-series window: 10 years",
-            "GDP target: next-year GDP per capita",
-            "Core methodology: dynamic pooled OLS",
-            "Country forecast layer: time-series benchmark",
+            "Stage 1: rolling 10-year indicator backtesting",
+            "Stage 2: next-year GDP per capita prediction",
+            "Shared GDP holdout: feature years 2018-2022",
+            "Evaluation: MAE, RMSE, MAPE, and R²",
         ],
+    )
+
+    render_note_box(
+        "Two distinct forecasting tasks",
+        (
+            "Indicator-level time-series forecasting and multivariate GDP prediction are "
+            "related but methodologically different. The first asks which temporal model "
+            "best predicts each individual indicator. The second asks whether demographic, "
+            "macroeconomic, regional, and structural information improves next-year GDP "
+            "per capita prediction. Their metrics should therefore be interpreted separately."
+        ),
     )
 
     gdp_best_model = _best_ts_model_name("gdp")
@@ -448,7 +483,12 @@ def render() -> None:
         "population": _best_ts_metrics_row("population"),
     }
 
-    st.markdown("### Time-series forecasting foundation")
+    st.markdown("### Stage 1 — Indicator-level time-series forecasting")
+    st.caption(
+        "GDP per capita, population, and life expectancy are evaluated separately because "
+        "their temporal behaviour differs. The reported winner for each indicator is selected "
+        "from rolling one-step-ahead backtesting with a 10-year historical window."
+    )
     metric_cols = st.columns(3)
     for col, dataset_key in zip(metric_cols, DATASET_ORDER):
         row = foundation_rows[dataset_key]
@@ -469,7 +509,16 @@ def render() -> None:
                     ),
                 )
 
-    st.markdown("### Interactive country forecast explorer")
+    st.markdown("### Interactive indicator forecast explorer")
+    render_note_box(
+        "Backtest winner versus future projection model",
+        (
+            "The model with the lowest one-step backtest error is retained as the formal "
+            "historical benchmark. For long-horizon demonstration, a different projection "
+            "model may be used when the benchmark winner would produce an implausibly flat "
+            "recursive path. This distinction is shown explicitly rather than hidden."
+        ),
+    )
     indicator_labels = [DATASET_META[key]["label"] for key in DATASET_ORDER]
     if hasattr(st, "segmented_control"):
         selected_indicator_label = st.segmented_control(
@@ -806,11 +855,182 @@ def render() -> None:
         f"({selected_projection_model}) for more plausible long-horizon forecasting. Compare models mode overlays all saved model paths on the same future horizon.",
     )
 
-    st.markdown("### Main GDP model benchmark on the shared test set")
-    st.caption(
-        "These metrics are the formal out-of-sample benchmark for the three rebuilt GDP specifications. "
-        "They should be interpreted separately from the future GDP scenario shown below."
+    st.markdown("### Stage 2 — Main GDP prediction models")
+
+    render_note_box(
+        "How Stage 1 connects to Stage 2",
+        (
+            "Stage 1 forecasts the individual drivers required for future scenarios. "
+            "Stage 2 then combines lagged GDP with demographic, macroeconomic, regional, "
+            "and structural information to predict next-year GDP per capita."
+        ),
     )
+
+    render_pipeline(
+        [
+            "Forecast future indicator values",
+            "Construct next-year GDP inputs",
+            "Apply Model 1, Model 2, and Model 3",
+            "Compare shared-holdout performance",
+            "Generate future GDP scenarios",
+        ]
+    )
+
+    st.markdown("#### Three progressive GDP prediction specifications")
+    model_cols = st.columns(3, gap="large")
+
+    with model_cols[0]:
+        render_metric_card(
+            "Model 1 — Baseline Dynamic",
+            "OLS",
+            (
+                "Lagged GDP + Population + Life Expectancy. "
+                "Purpose: establish the simplest interpretable benchmark."
+            ),
+        )
+
+    with model_cols[1]:
+        render_metric_card(
+            "Model 2 — Extended Dynamic",
+            "Elastic Net",
+            (
+                "Model 1 inputs + Inflation + Unemployment + Internet Usage. "
+                "Purpose: test whether macroeconomic and digital indicators improve prediction."
+            ),
+        )
+
+    with model_cols[2]:
+        render_metric_card(
+            "Model 3 — Full Dynamic",
+            "OLS",
+            (
+                "Model 2 inputs + Region Effects + Event Dummies + Year Trend. "
+                "Purpose: capture structural differences and major global shocks."
+            ),
+        )
+
+    render_note_box(
+        "Why are variables added progressively?",
+        (
+            "The models are intentionally nested from simple to complex. This allows the project "
+            "to test whether each additional information layer—demographic, macroeconomic, digital, "
+            "regional, and structural—adds useful predictive or explanatory value without losing "
+            "the interpretability of the baseline comparison."
+        ),
+    )
+
+    indicator_role_df = pd.DataFrame(
+        [
+            {
+                "Indicator": "Lagged GDP per capita",
+                "Reason for inclusion": (
+                    "Captures persistence in a country's recent economic level."
+                ),
+            },
+            {
+                "Indicator": "Population",
+                "Reason for inclusion": (
+                    "Represents demographic scale, labour supply, and market size."
+                ),
+            },
+            {
+                "Indicator": "Life expectancy",
+                "Reason for inclusion": (
+                    "Acts as a proxy for long-run human development and population health."
+                ),
+            },
+            {
+                "Indicator": "Inflation",
+                "Reason for inclusion": (
+                    "Captures macroeconomic price stability and purchasing-power pressure."
+                ),
+            },
+            {
+                "Indicator": "Unemployment",
+                "Reason for inclusion": (
+                    "Reflects labour-market utilisation and short-run economic conditions."
+                ),
+            },
+            {
+                "Indicator": "Internet usage",
+                "Reason for inclusion": (
+                    "Provides a proxy for digital adoption, connectivity, and productive capacity."
+                ),
+            },
+            {
+                "Indicator": "Region effects",
+                "Reason for inclusion": (
+                    "Control for persistent structural differences between World Bank regions."
+                ),
+            },
+            {
+                "Indicator": "Event dummies",
+                "Reason for inclusion": (
+                    "Represent major global shocks that may shift GDP beyond normal trends."
+                ),
+            },
+            {
+                "Indicator": "Year trend",
+                "Reason for inclusion": (
+                    "Captures broad long-run movement not explained by the observed predictors."
+                ),
+            },
+        ]
+    )
+
+    with st.expander(
+        "Why are these indicators included in the GDP models?",
+        expanded=False,
+    ):
+        st.dataframe(
+            indicator_role_df,
+            use_container_width=True,
+            hide_index=True,
+        )
+
+    render_note_box(
+        "Why OLS for Models 1 and 3, but Elastic Net for Model 2?",
+        (
+            "OLS is used for Models 1 and 3 because direct coefficient interpretation is central "
+            "to the baseline and full structural specifications. Elastic Net is used for Model 2 "
+            "because its regularisation can stabilise prediction when correlated macroeconomic "
+            "and digital predictors are introduced together."
+        ),
+    )
+
+    render_note_box(
+        "Transition to model evaluation",
+        (
+            "The next benchmark compares fifteen model-and-algorithm configurations on the same "
+            "chronological holdout. This ensures that the final decision is based on common "
+            "out-of-sample evidence rather than model complexity alone."
+        ),
+    )
+
+    st.markdown("#### Shared-holdout model benchmark")
+    st.caption(
+        "Fifteen GDP model configurations were evaluated on the same chronological "
+        "holdout sample. Panel A ranks configurations by RMSE, while Panel B compares "
+        "MAE, MAPE, and R² for the same ordering."
+    )
+
+    if GDP_BENCHMARK_FIG_PATH.exists():
+        st.image(
+            str(GDP_BENCHMARK_FIG_PATH),
+            caption="Common-holdout benchmark across fifteen GDP model configurations",
+            use_container_width=True,
+        )
+
+        render_note_box(
+            "Benchmark interpretation",
+            (
+                "Model 2 + Elastic Net achieves the lowest holdout RMSE and the highest "
+                "R², making it the strongest predictive configuration. Model 3 + OLS "
+                "achieves the lowest MAE and MAPE while retaining direct coefficient, "
+                "regional-effect, and event-dummy interpretation. The project therefore "
+                "reports separate predictive and explanatory winners."
+            ),
+        )
     main_test_table = build_model_test_table(main_metrics_df)
     best_main = get_best_main_model(main_metrics_df)
     if best_main is not None:
@@ -839,7 +1059,16 @@ def render() -> None:
 
     st.plotly_chart(build_main_model_yearly_chart(main_yearly_df), use_container_width=True)
 
-    st.markdown("### Future GDP scenario from the three main specifications")
+    st.markdown("### Future GDP scenarios from the three main specifications")
+    render_note_box(
+        "Evaluation evidence versus future scenario",
+        (
+            "The shared-holdout results above are the formal evidence of predictive performance. "
+            "The future paths below are forward-looking scenario demonstrations that depend on "
+            "recursively forecasted GDP and driver values; they should not be interpreted as "
+            "certainty or as replacements for the test-set results."
+        ),
+    )
     st.caption(
         "This scenario extends GDP per capita beyond the observed panel. Each future GDP year uses the previous year's GDP "
         "plus forecasted drivers from the feature year immediately before it."
@@ -900,17 +1129,31 @@ def render() -> None:
         latest_actual_gdp_year = int(
             future_country_panel.loc[future_country_panel["gdp_per_capita_usd"].notna(), "year"].max()
         )
-        max_future_target_year = latest_actual_gdp_year + 15
-        default_future_target_year = min(latest_actual_gdp_year + 10, max_future_target_year)
+        max_future_target_year = latest_actual_gdp_year + 30
+        default_future_target_year = min(
+            latest_actual_gdp_year + 10,
+            max_future_target_year,
+        )
 
         with future_target_col:
-            future_target_year = st.slider(
-                "Select a future GDP target year",
-                min_value=latest_actual_gdp_year + 1,
-                max_value=max_future_target_year,
-                value=default_future_target_year,
-                step=1,
-                key="future_main_model_target_year",
+            future_target_year = int(
+                st.number_input(
+                    "Enter a future GDP target year",
+                    min_value=latest_actual_gdp_year + 1,
+                    max_value=max_future_target_year,
+                    value=default_future_target_year,
+                    step=1,
+                    key="future_main_model_target_year",
+                    help=(
+                        "Enter a year after the latest observed GDP year. "
+                        "The dashboard recursively forecasts all required inputs "
+                        "and produces GDP-per-capita scenarios from Models 1, 2, and 3."
+                    ),
+                )
+            )
+            st.caption(
+                f"Available range: {latest_actual_gdp_year + 1}-"
+                f"{max_future_target_year}. Longer horizons carry greater uncertainty."
             )
 
         try:
@@ -920,9 +1163,11 @@ def render() -> None:
                 target_year=future_target_year,
             )
 
-            best_main_model_name = None
-            if best_main is not None:
-                best_main_model_name = str(best_main["model"])
+            # Model 3 is the final selected model of the project.
+            # Model 2 + Elastic Net remains the strongest RMSE-based benchmark,
+            # but the future scenario layer highlights Model 3 because it combines
+            # competitive accuracy with full structural interpretability.
+            best_main_model_name = FINAL_SELECTED_MAIN_MODEL
 
             future_history_df = (
                 future_country_panel[["year", "gdp_per_capita_usd"]]
@@ -932,43 +1177,83 @@ def render() -> None:
                 .copy()
             )
 
-            top_future_row = future_summary_df.iloc[0]
             future_spread = (
                 float(future_summary_df["_target_value_raw"].max())
                 - float(future_summary_df["_target_value_raw"].min())
             )
 
-            future_metric_cols = st.columns(5)
-            with future_metric_cols[0]:
+            summary_by_model = future_summary_df.set_index("Model")
+            selected_model_row = summary_by_model.loc[FINAL_SELECTED_MAIN_MODEL]
+
+            context_cols = st.columns(4)
+            with context_cols[0]:
                 render_metric_card(
                     "Selected country",
                     future_country_code,
                     f"{future_country_name} | {future_meta['wb_region']}",
                 )
-            with future_metric_cols[1]:
+            with context_cols[1]:
                 render_metric_card(
                     "Latest actual GDP year",
                     str(future_meta["latest_actual_gdp_year"]),
                     format_currency(future_meta["latest_actual_gdp_value"]),
                 )
-            with future_metric_cols[2]:
+            with context_cols[2]:
                 render_metric_card(
-                    "First future GDP year",
-                    str(future_meta["first_future_gdp_year"]),
-                    f"Target year: {future_target_year}",
+                    "Target forecast year",
+                    str(future_target_year),
+                    f"First forecast year: {future_meta['first_future_gdp_year']}",
                 )
-            with future_metric_cols[3]:
-                render_metric_card(
-                    f"Top scenario in {future_target_year}",
-                    str(top_future_row["Forecast in target year"]),
-                    str(top_future_row["Model"]),
-                )
-            with future_metric_cols[4]:
+            with context_cols[3]:
                 render_metric_card(
                     "Model spread",
                     format_currency(future_spread),
-                    "Gap between the highest and lowest target-year GDP scenarios",
+                    "Highest minus lowest target-year scenario",
                 )
+
+            st.markdown(f"#### GDP per capita forecasts for {future_target_year}")
+            forecast_cols = st.columns(3)
+
+            ordered_models = [
+                "Model 1 - Baseline Dynamic",
+                "Model 2 - Extended Dynamic",
+                "Model 3 - Full Dynamic",
+            ]
+
+            for col, model_name in zip(forecast_cols, ordered_models):
+                model_row = summary_by_model.loc[model_name]
+                with col:
+                    is_selected = model_name == FINAL_SELECTED_MAIN_MODEL
+                    render_metric_card(
+                        model_name,
+                        str(model_row["Forecast in target year"]),
+                        (
+                            "Final selected model: lowest MAE and MAPE with "
+                            "full structural interpretability"
+                            if is_selected
+                            else (
+                                "Strongest RMSE-based predictive benchmark"
+                                if model_name == "Model 2 - Extended Dynamic"
+                                else "Baseline scenario for comparison"
+                            )
+                        ),
+                        delta="FINAL SELECTED MODEL" if is_selected else None,
+                        tone="positive" if is_selected else "neutral",
+                    )
+
+            render_note_box(
+                "Final model selection",
+                (
+                    f"Model 3 - Full Dynamic is the final selected model. Its "
+                    f"{future_target_year} GDP-per-capita forecast for "
+                    f"{future_country_name} is "
+                    f"{selected_model_row['Forecast in target year']}. "
+                    "Model 3 is highlighted because it records the lowest MAE and "
+                    "MAPE while retaining direct interpretation of regional effects, "
+                    "event dummies, macroeconomic drivers, and the time trend. "
+                    "Model 2 + Elastic Net remains the strongest RMSE-based benchmark."
+                ),
+            )
 
             st.plotly_chart(
                 build_multi_forecast_chart(
@@ -985,8 +1270,25 @@ def render() -> None:
                 use_container_width=True,
             )
 
+            display_future_summary = (
+                future_summary_df.set_index("Model")
+                .reindex(
+                    [
+                        "Model 1 - Baseline Dynamic",
+                        "Model 2 - Extended Dynamic",
+                        "Model 3 - Full Dynamic",
+                    ]
+                )
+                .reset_index()
+            )
+            display_future_summary["Role"] = [
+                "Baseline comparison",
+                "Best RMSE-based benchmark",
+                "Final selected model",
+            ]
+
             st.dataframe(
-                future_summary_df.drop(columns=["_target_value_raw"]),
+                display_future_summary.drop(columns=["_target_value_raw"]),
                 use_container_width=True,
                 hide_index=True,
             )
@@ -1061,7 +1363,7 @@ def render() -> None:
                     st.info(f"{caption} figure is not available.")
 
     if not benchmark_df.empty:
-        with st.expander("Optional machine-learning benchmark outputs detected in the repository", expanded=False):
+        with st.expander("Algorithm benchmark across saved GDP configurations", expanded=False):
             benchmark_table = benchmark_df[
                 (benchmark_df["split"].astype(str).str.lower() == "test")
                 & (benchmark_df["scale"].astype(str).str.lower() == "level_gdp_usd")
@@ -1077,6 +1379,40 @@ def render() -> None:
             )
             st.dataframe(benchmark_table, use_container_width=True, hide_index=True)
             st.caption(
-                "These benchmark results are shown as extension work only. The dashboard keeps the rebuilt "
-                "dynamic pooled OLS models as the main academic modelling layer."
+                "These saved test results compare the available algorithm configurations on the "
+                "GDP prediction task. Interpret them together with specification logic, data coverage, "
+                "and model transparency rather than selecting a model on complexity alone."
             )
+
+    render_insight_box(
+        "Forecasting interpretation",
+        [
+            (
+                f"Rolling backtesting identifies {gdp_best_model} for GDP per capita, "
+                f"{life_best_model} for life expectancy, and {pop_best_model} for population "
+                "within the saved indicator-level results."
+            ),
+            (
+                "The best one-step backtest model is not automatically the most suitable "
+                "model for a recursive multi-year projection."
+            ),
+            (
+                "The main GDP benchmark evaluates predictive accuracy on a shared holdout, "
+                "while richer specifications are also assessed for interpretability and "
+                "structural relevance."
+            ),
+            (
+                "Future GDP outputs are scenario paths conditional on forecasted inputs and "
+                "historical model structure, not guaranteed economic outcomes."
+            ),
+        ],
+    )
+
+    render_note_box(
+        "Next stage",
+        (
+            "The final page consolidates the empirical findings from EDA, country comparison, "
+            "relationship analysis, time-series forecasting, and the main GDP models. It also "
+            "states the project's limitations, critical evaluation, and future improvements."
+        ),
+    )
